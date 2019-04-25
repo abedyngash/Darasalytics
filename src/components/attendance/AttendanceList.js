@@ -14,7 +14,7 @@ const AttendanceList = ({lecteachs}) => {
                         state: {
                           fromNotifications: true,
                           single_class: lecteach,
-                        //   courses: lecteach['courses']
+                        
                         }
                       }}>     
                         <AttendanceSummary lecteach={lecteach} key={lecteach.id}/> 

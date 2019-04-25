@@ -3,34 +3,32 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Tabs, Tab, Nav, Col, Row } from 'react-bootstrap';
+import AttendCourses from './AttendanceCourses';
 
-var course_index = 0;
+var COURSE_INDEX = 1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ;
 
 class AttendanceDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            course_key: 0,
-            single_class : props.single_class,
-            courses : props.courses,
-            // attendances : props.attendances,
-        };
+            index: 0 //initial state
+        }
+
       }
 
-    handleSelect(key=0, props) {
-        
-        console.log(key)
-        course_index  = course_index + key;
-        props.index = key;
-        return (key);
+    handleSelect(key, props) {
+		this.setState({index: parseInt(key)})
+		
     }
 
-
     render(){
-                
-        const {single_class, courses, attendances} = this.props;
+        this.handleSelect = this.handleSelect.bind(this);
         
-        // console.log(this.state);
+                
+        const {single_class, courses} = this.props;
+        
+        
+        console.log(this.state.index);
         if(single_class) {
             return(
             <div className='container content-section'>
@@ -53,65 +51,25 @@ class AttendanceDetail extends React.Component {
                     </div>
                 </div>
                 <h2 className='mb-5'>Toggle between the tabs below to see your attendances</h2>
+                <Tabs defaultActiveKey={0} className="content-section" onSelect={this.handleSelect} id="uncontrolled-tab-example">
                 
-                <Tabs defaultActiveKey={0} onSelect={this.handleSelect} id="uncontrolled-tab-example">
-
                 { courses.map((course, index) => {
-                //    console.log(index)
-                   
+
                     return (
+                    	
                     <Tab eventKey={index} title={course.course  + " year " + course.yearofstudy}>
                     <div className="mt-4">
-                    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                            <Row>
-                                <Col sm={3}>
-                                <Nav variant="pills" className="flex-column">
-                                    <Nav.Item>
-                                    <Nav.Link eventKey="first">Weekly Attendance</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                    <Nav.Link eventKey="second">Mothly Attendance</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                    <Nav.Link eventKey="third">Semester wise Attendance</Nav.Link>
-                                    </Nav.Item>
-                                </Nav>
-                                </Col>
-                                <Col sm={9}>
-                                <Tab.Content>
-                                    <Tab.Pane eventKey="first">
-                                    <h5 className="border-bottom">This week's class attendees</h5>
-                                    {attendances && attendances.map((attendance, index) => 
-                                        <div>
-                                            
-                                            <h6> 
-                                                {index + 1} : { attendance.studname} 
-                                                <span className="float-right">{attendance.regno}</span>
-                                            </h6>
-                                        
-                                        </div>
-                                        
-                                    )}
-                                    </Tab.Pane>
-                                    <Tab.Pane eventKey="second">
-                                        This is for monthly attendance
-                                        <br/>
-                                        {course.course} Year {course.yearofstudy}
-                                    </Tab.Pane>
-                                    <Tab.Pane eventKey="third">
-                                        This is for semester wise attendance
-                                        <br/>
-                                        {course.course} Year {course.yearofstudy}
-                                    </Tab.Pane>
-                                </Tab.Content>
-                                </Col>
-                            </Row>
+                    <Tab.Container onFocus={this.handleSelect} id="left-tabs-example" defaultActiveKey="first">
+                    		<AttendCourses course={course} index={this.state.index} single_class={single_class} />
+                            
                         </Tab.Container>
                     </div>
                     </Tab>
+                   
                     )
                 })}   
                 </Tabs>
+                
             
             </div>
             )
@@ -133,11 +91,13 @@ class AttendanceDetail extends React.Component {
 // const timestamp = my_date.getTime();
 // console.log(timestamp)
 
+
 const mapStateToProps = (state, ownProps) => {
    
     
     const id = ownProps.match.params.id;
     // console.log(id)
+    
     const db_received = state.firestore.data.LecTeachTime;
     // console.log(db_received ? db_received : {})
     const units = db_received ? db_received : {};
@@ -154,8 +114,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         single_class: single_class,
         courses: courses,
-        attendances: attendances,
-        index : 1
+       
         
     }
 }
@@ -166,24 +125,5 @@ export default compose(
     firestoreConnect( [
         { collection : 'LecTeachTime' }
     ]),
-    firestoreConnect( props =>
-        {
-            // console.log(props)
-            const { single_class } = props.location.state;
-           
-           
-            return [
-                {    
-                    collection : 'StudentScanClass',
-                    where: [
-                        ['unitcode', '==',single_class.unitcode], 
-                        ['course', '==', single_class.courses[props.index].course.toString()],
-                        ['year', '==', '2018'],
-                        ['yearofstudy', '==', single_class.courses[props.index].yearofstudy.toString()]
-
-                    ],
-                }  
-                ]          
-        }
-    )
+    
 ) (AttendanceDetail);
