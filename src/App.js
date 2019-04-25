@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import {BrowserRouter, Switch, Route } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import Dashboard from './components/dashboard/Dashboard';
+import AttendanceDetail from './components/attendance/AttendanceDetail';
+import SignIn from './components/auth/SignIn';
+import CreateLec from './components/attendance/CreateLecturers';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Navbar/>
+          <div className="container-fluid">
+            <Switch>
+              
+              <Route exact path='/' component={Dashboard} />
+             
+              <Route path='/class/:id' component={AttendanceDetail} />
+              
+              <Route path='/login' component={SignIn}/>
+              
+              <Route path='/create_lec' component={CreateLec}/>
+              
+            </Switch>
+          </div>
+          
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
