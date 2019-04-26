@@ -17,6 +17,7 @@ class SignIn extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.signIn(this.state);
+        e.target.signin.value = "Logging in ..."
     }
   render() {
     const {authError, auth} = this.props;
@@ -25,7 +26,9 @@ class SignIn extends Component {
       <div className="container content-section">
         <form onSubmit={this.handleSubmit}>
         
-          {authError ? <div className="alert alert-danger">{authError}</div> : null }
+          {authError ? <div className="alert alert-danger">{authError}<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button></div> : null }
         
         <div className="text-center">
             <img className="pt-3 account-img" src={mainLogo}/>
@@ -47,7 +50,7 @@ class SignIn extends Component {
             </div>
             </fieldset>
             <div>
-                <button className="btn btn-block btn-outline-info" type="submit">Login</button>
+                <button id="signin" className="btn btn-block btn-outline-info" type="submit">Login</button>
             </div>
         </form>
       </div>

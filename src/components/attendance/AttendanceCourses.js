@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
+import moment from 'moment';
+
 const AttendCourses = (props) => {
 	const {attendances} = props;
 	
@@ -33,7 +35,7 @@ const AttendCourses = (props) => {
                         <div>
 
                             <h6> 
-                                {index + 1} : { attendance.studname} 
+                                {index + 1} : { attendance.studname} &nbsp; {moment(attendance.classtime.toDate()).calendar()}
                                 <span className="float-right">{attendance.regno}</span>
                             </h6>
                         
@@ -59,7 +61,7 @@ const AttendCourses = (props) => {
 }
 
 const mapStateToProps = (state) => {
-   
+   console.log(state)
     
     const dbReceived = state.firestore && state.firestore.data.StudentScanClass;
     
@@ -73,6 +75,9 @@ const mapStateToProps = (state) => {
     }
 }
 
+const my_date = new Date();
+const timestamp = my_date.getTime();
+console.log(moment(timestamp).calendar())
 
 export default compose(
     connect(mapStateToProps),
@@ -87,6 +92,7 @@ export default compose(
 					where: [
 		                ['unitcode', '==', props.single_class.unitcode],
 		                ['course', '==', props.single_class.courses[props.index].course],
+                        // ['classtime', '==', timestamp],
 		                ['yearofstudy', '==', props.single_class.courses[props.index].yearofstudy.toString()],
 		            ],
                     
