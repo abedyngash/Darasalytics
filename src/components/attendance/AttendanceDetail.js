@@ -51,7 +51,7 @@ class AttendanceDetail extends React.Component {
                     </div>
                 </div>
                 <h2 className='mb-5'>Toggle between the tabs below to see your attendances</h2>
-                <Tabs defaultActiveKey={0} className="content-section" onSelect={this.handleSelect} id="uncontrolled-tab-example">
+                <Tabs defaultActiveKey={0} className="card-header" onSelect={this.handleSelect} id="uncontrolled-tab-example">
                 
                 { courses.map((course, index) => {
 

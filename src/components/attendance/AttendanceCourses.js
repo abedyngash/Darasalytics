@@ -18,7 +18,7 @@ const AttendCourses = (props) => {
         <div>
         	<Row>
                 <Col sm={3}>
-                <Nav variant="pills" className="flex-column">
+                <Nav variant="pills" className="flex-column card card-header">
                     <Nav.Item>
                     <Nav.Link eventKey="first">Weekly Attendance</Nav.Link>
                     </Nav.Item>
@@ -34,15 +34,53 @@ const AttendCourses = (props) => {
                 <Tab.Content>
                     <Tab.Pane eventKey="first">
 
-                    <h5 className="border-bottom">This week's class attendees</h5>
+                    <h5 className="border-bottom pb-2 mb-2">Attendees within the last week</h5>
+                    
+                    <div className='ml-3 font-weight-bold'>
+                                     
+                                <div className="row">
+                                    <div className="col-md-1">
+                                        S.No
+                                    </div>
+                                    <div className="col-md-3">
+                                        Name
+                                    </div>
+                                    <div className="col-md-4">
+                                        Date of Attendance
+                                    </div>
+                                    <div className="col-md-4">
+                                        Reg Number 
+                                    </div>
+                                </div>
+                            </div>
+
                     {attendances && attendances.map((attendance, index) => {
                         console.log(attendance.date)
                         return(
                         <div>
 
+                            
+
                             <h6> 
-                                {index + 1} : { attendance.studname} &nbsp; {moment(attendance.date.toDate()).calendar()}
-                                <span className="float-right">{attendance.regno}</span>
+                                
+                                <div className='card card-header'>
+                                     
+                                    <div className="row">
+                                        <div className="col-md-1">
+                                            {index + 1} :
+                                        </div>
+                                        <div className="col-md-3">
+                                            { attendance.studname}
+                                        </div>
+                                        <div className="col-md-4">
+                                            {moment(attendance.date.toDate()).calendar()}
+                                        </div>
+                                        <div className="col-md-4">
+                                            {attendance.regno} 
+                                        </div>
+                                    </div>
+                                </div>
+
                             </h6>
                         
                         </div>
@@ -50,14 +88,112 @@ const AttendCourses = (props) => {
                     })}
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
-                        This is for monthly attendance
-                        <br/>
-                        {props.course.course} Year {props.course.yearofstudy}
+                        <h5 className="border-bottom pb-2 mb-2">Attendees within the last month</h5>
+                    
+                    <div className='ml-3 font-weight-bold'>
+                                     
+                                <div className="row">
+                                    <div className="col-md-1">
+                                        S.No
+                                    </div>
+                                    <div className="col-md-3">
+                                        Name
+                                    </div>
+                                    <div className="col-md-4">
+                                        Date of Attendance
+                                    </div>
+                                    <div className="col-md-4">
+                                        Reg Number 
+                                    </div>
+                                </div>
+                            </div>
+
+                    {attendances && attendances.map((attendance, index) => {
+                        console.log(attendance.date)
+                        return(
+                        <div>
+
+                            
+
+                            <h6> 
+                                
+                                <div className='card card-header'>
+                                     
+                                    <div className="row">
+                                        <div className="col-md-1">
+                                            {index + 1} :
+                                        </div>
+                                        <div className="col-md-3">
+                                            { attendance.studname}
+                                        </div>
+                                        <div className="col-md-4">
+                                            {moment(attendance.date.toDate()).calendar()}
+                                        </div>
+                                        <div className="col-md-4">
+                                            {attendance.regno} 
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </h6>
+                        
+                        </div>
+                        )
+                    })}
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
-                        This is for semester wise attendance
-                        <br/>
-                        {props.course.course} Year {props.course.yearofstudy}
+                        <h5 className="border-bottom pb-2 mb-2">Attendees within the semester</h5>
+                    
+                    <div className='ml-3 font-weight-bold'>
+                                     
+                                <div className="row">
+                                    <div className="col-md-1">
+                                        S.No
+                                    </div>
+                                    <div className="col-md-3">
+                                        Name
+                                    </div>
+                                    <div className="col-md-4">
+                                        Date of Attendance
+                                    </div>
+                                    <div className="col-md-4">
+                                        Reg Number 
+                                    </div>
+                                </div>
+                            </div>
+
+                    {attendances && attendances.map((attendance, index) => {
+                        console.log(attendance.date)
+                        return(
+                        <div>
+
+                            
+
+                            <h6> 
+                                
+                                <div className='card card-header'>
+                                     
+                                    <div className="row">
+                                        <div className="col-md-1">
+                                            {index + 1} :
+                                        </div>
+                                        <div className="col-md-3">
+                                            { attendance.studname}
+                                        </div>
+                                        <div className="col-md-4">
+                                            {moment(attendance.date.toDate()).calendar()}
+                                        </div>
+                                        <div className="col-md-4">
+                                            {attendance.regno} 
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </h6>
+                        
+                        </div>
+                        )
+                    })}
                     </Tab.Pane>
                 </Tab.Content>
                 </Col>
