@@ -4,8 +4,12 @@ import { Tabs, Tab, Nav, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import firebase from 'firebase';
 
 import moment from 'moment';
+
+// import * as admin from 'firebase-admin';
+
 
 const AttendCourses = (props) => {
 	const {attendances} = props;
@@ -31,17 +35,19 @@ const AttendCourses = (props) => {
                     <Tab.Pane eventKey="first">
 
                     <h5 className="border-bottom">This week's class attendees</h5>
-                    {attendances && attendances.map((attendance, index) => 
+                    {attendances && attendances.map((attendance, index) => {
+                        console.log(attendance.date)
+                        return(
                         <div>
 
                             <h6> 
-                                {index + 1} : { attendance.studname} &nbsp; {moment(attendance.classtime.toDate()).calendar()}
+                                {index + 1} : { attendance.studname} &nbsp; {moment(attendance.date.toDate()).calendar()}
                                 <span className="float-right">{attendance.regno}</span>
                             </h6>
                         
                         </div>
-                        
-                    )}
+                        )
+                    })}
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                         This is for monthly attendance
@@ -77,7 +83,21 @@ const mapStateToProps = (state) => {
 
 const my_date = new Date();
 const timestamp = my_date.getTime();
-console.log(moment(timestamp).calendar())
+const new_timestamp = Math.round(timestamp/1000)*1000 //1000 * (timestamp / 1000)
+console.log(new_timestamp)
+
+const begin_date = firebase.firestore.Timestamp.fromDate(new Date(
+1548855907000
+//1556614782000
+// new_timestamp
+    ));
+
+const end_date = firebase.firestore.Timestamp.fromDate(new Date(
+1552038838000
+// 1556614782000
+// new_timestamp
+    ));
+// console.log(begin_date)
 
 export default compose(
     connect(mapStateToProps),
@@ -92,7 +112,8 @@ export default compose(
 					where: [
 		                ['unitcode', '==', props.single_class.unitcode],
 		                ['course', '==', props.single_class.courses[props.index].course],
-                        // ['classtime', '==', timestamp],
+                        ["date", ">", begin_date],
+                        ["date", "<", end_date],
 		                ['yearofstudy', '==', props.single_class.courses[props.index].yearofstudy.toString()],
 		            ],
                     
