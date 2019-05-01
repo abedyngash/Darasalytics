@@ -4,8 +4,8 @@ import Navbar from './components/layout/Navbar';
 import Dashboard from './components/dashboard/Dashboard';
 import AttendanceDetail from './components/attendance/AttendanceDetail';
 import SignIn from './components/auth/SignIn';
-import SignUpLec from './components/auth/SignUpLec';
-import SignUpSuperUser from './components/auth/SignUpSuperUser';
+import SignUp from './components/auth/SignUp';
+
 
 class App extends Component {
 
@@ -23,9 +23,8 @@ class App extends Component {
               
               <Route path='/login' component={SignIn}/>
               
-              <Route path='/add_lec' component={SignUpLec}/>
+              <Route path='/add_user' component={SignUp}/>
 
-              <Route path='/add_superuser' component={SignUpSuperUser}/>
               
             </Switch>
           </div>

@@ -17,7 +17,7 @@ const store = createStore(rootReducer,
         getFirebase, getFirestore
     })),
     reduxFirestore(fbConfig),
-    reactReduxFirebase(fbConfig, {attachAuthIsReady: true}),
+    reactReduxFirebase(fbConfig, {useFirestoreForProfile: true, userProfile : 'Staff', attachAuthIsReady: true}),
     )
 );
 

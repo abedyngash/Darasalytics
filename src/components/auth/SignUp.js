@@ -4,12 +4,13 @@ import {connect} from 'react-redux';
 import {signUpLec} from '../../store/actions/authActions';
 import {Redirect} from 'react-router-dom';
 
-class SignUpLec extends Component {
+class SignUp extends Component {
     state = {
        email : '',
        password : '',
        firstName : '',
-       lastName : ''
+       lastName : '',
+       role : ''
     }
     handleChange = (e) => {
         this.setState({
@@ -38,7 +39,7 @@ class SignUpLec extends Component {
             <img className="pt-3 account-img" src={mainLogo}/>
         </div>
         <fieldset className="form-group">
-				<legend className="border-bottom mb-4 pt-3 text-center"> Add New Lecturer</legend>
+				<legend className="border-bottom mb-4 pt-3 text-center"> Add New User</legend>
             <div className='form-group'>
                 <label htmlFor="firstName">
                     First Name
@@ -62,6 +63,18 @@ class SignUpLec extends Component {
                     Password
                 </label>
                 <input type="password" id="password" onChange={this.handleChange} className="form-control"/>
+            </div>
+            <div>
+                <label htmlFor="role">
+                    Role
+                </label>
+                <select id="role" onChange={this.handleChange} className="form-control">
+                    <option value="none">-----</option>
+                    <option value="lecturer">Lecturer</option>
+                    <option value="dean">School Dean</option>
+                    <option value="c.o.d">C.O.D</option>
+                    <option value="registrar">Registrar</option>
+                </select>
             </div>
             </fieldset>
             <div>
@@ -87,4 +100,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps) (SignUpLec);
+export default connect(mapStateToProps, mapDispatchToProps) (SignUp);
