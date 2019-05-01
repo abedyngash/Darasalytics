@@ -11,30 +11,39 @@ const Navbar = (props) => {
     const links = auth.uid ? <SignedIn profile={profile}/> : <SignedOut />
 
     return (
-        
-            <header className="site-header">
-                <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-steel">
-                    <div className="container">
-                        
-                        <NavLink className="navbar-brand mr-4" to="">
-                            <img src={mainLogo} className="navbar-img" />
-                            &nbsp;
-                            DarasaLytics
-                        </NavLink>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="collapse navbar-collapse" id="navbarToggle">
+           <div> 
 
-                            <div className="navbar-nav mr-auto">
-                                <NavLink className="nav-link nav-item" to="/docs">Docs</NavLink>
-                            </div>
-                            { links }
-                        </div>
+            <nav className="navbar navbar-expand navbar-dark bg-dark static-top">
+
+                <NavLink className="navbar-brand mr-4" to="">
+                    <img src={mainLogo} className="navbar-img" />
+                    &nbsp;
+                    DarasaLytics
+                </NavLink>
+
+                <button className="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+                  <i class="fas fa-bars"></i>
+                </button>
+                
+                
+                
+                <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                  <div className="input-group">
+                    <input type="text" className="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                    <div className="input-group-append">
+                      <button className="btn btn-outline-primary" type="button">
+                        <i class="fas fa-search"></i>
+                      </button>
                     </div>
-                </nav>
-            </header>
+                  </div>
+                </form>
+
+                {links}
+            </nav>
+
             
+
+            </div>
        
     );
 }

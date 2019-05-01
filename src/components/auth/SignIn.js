@@ -27,36 +27,39 @@ class SignIn extends Component {
     const {authError, auth,} = this.props;
     if(auth.uid) return <Redirect to='/' />
     return (
-      <div className="container content-section">
+      <div className=" bg-dark container">
+      <div className="card card-register mx-auto mt-5">
+      <div className="card-header">Login Here</div>
+      <div className="card-body">
         <form onSubmit={this.handleSubmit}>
-        
-          {authError ? <div className="alert alert-danger">{authError}<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+            {authError ? <div className="alert alert-danger">{authError}<button type="button" className="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button></div> : null }
-        
-        <div className="text-center">
-            <img className="pt-3 account-img" src={mainLogo}/>
-        </div>
-        <fieldset className="form-group">
-				<legend className="border-bottom mb-4 pt-3 text-center"> Login Below</legend>
-
-            <div className='from-group'>
-                <label htmlFor="email">
+            <div className="text-center">
+                <img className="pt-3 account-img" src={mainLogo}/>
+            </div>
+          <div class="form-group">
+            <div class="">
+              <label htmlFor="email">
                     Email
                 </label>
                 <input type="email" id="email" onChange={this.handleChange} className="form-control"/>
             </div>
-            <div className='from-group'>
-                <label htmlFor="password">
+          </div>
+          <div class="form-group">
+            <div class="">
+              <label htmlFor="password">
                     Password
                 </label>
                 <input type="password" id="password" onChange={this.handleChange} className="form-control"/>
             </div>
-            </fieldset>
-            <div>
-                <button id="signin" className="btn btn-block btn-outline-info" type="submit">Login</button>
-            </div>
+          </div>
+                    
+          <button className="btn btn-outline-primary btn-block" type="submit">Login</button>
         </form>
+        
+      </div>
+      </div>
       </div>
     )
   }

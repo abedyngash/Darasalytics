@@ -7,11 +7,63 @@ import { NavDropdown } from 'react-bootstrap';
 const SignedIn = (props) => {
     
     return (
-        <div className="navbar-nav">
-            <NavLink className="nav-item nav-link" to="/add_user">Add New User</NavLink>
-            <NavLink className="nav-item nav-link" to="">Graphical Analysis</NavLink>
-            <NavLink className="nav-item nav-link inset text-center" to=""><p>{props.profile.initials}</p></NavLink>
-            <a onClick={props.signOut} href="" className="nav-item nav-link">Logout</a>
+        
+        <div>   
+            <ul className="navbar-nav ml-auto ml-md-0">
+              <li className="nav-item dropdown no-arrow mx-1">
+                <a className="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i className="fas fa-bell fa-fw"></i>
+                  <span className="badge badge-danger">0</span>
+                </a>
+                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+                  <a className="dropdown-item" href="#">Action</a>
+                  <a className="dropdown-item" href="#">Another action</a>
+                  <div className="dropdown-divider"></div>
+                  <a className="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+              <li className="nav-item dropdown no-arrow mx-1">
+                <a className="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i className="fas fa-envelope fa-fw"></i>
+                  
+                </a>
+                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+                  <a className="dropdown-item" href="#">Action</a>
+                  <a className="dropdown-item" href="#">Another action</a>
+                  <div className="dropdown-divider"></div>
+                  <a className="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+              <li className="nav-item dropdown no-arrow">
+                <a className="nav-link dropdown-toggle inset" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <p>{props.profile.initials}</p>
+                </a>
+                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                  <a className="dropdown-item" href="#">Settings</a>
+                  <a className="dropdown-item" href="#">Activity Log</a>
+                  <div className="dropdown-divider"></div>
+                  <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                </div>
+              </li>
+            </ul>
+
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">Are you sure you want to log out?</div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                      <a class="btn btn-danger" onClick={props.signOut} href="#">Logout</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     )
 }

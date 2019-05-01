@@ -28,42 +28,55 @@ class SignUp extends Component {
     // if(auth.uid) return <Redirect to='/' />
     
     return (
-      <div className="container content-section">
+      <div className=" bg-dark container">
+      <div className="card card-register mx-auto mt-5">
+      <div className="card-header">Register New User</div>
+      <div className="card-body">
         <form onSubmit={this.handleSubmit}>
-        
-          {authError ? <div className="alert alert-danger">{authError}<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+            {authError ? <div className="alert alert-danger">{authError}<button type="button" className="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button></div> : null }
-        
-        <div className="text-center">
-            <img className="pt-3 account-img" src={mainLogo}/>
-        </div>
-        <fieldset className="form-group">
-				<legend className="border-bottom mb-4 pt-3 text-center"> Add New User</legend>
-            <div className='form-group'>
-                <label htmlFor="firstName">
+            <div className="text-center">
+                <img className="pt-3 account-img" src={mainLogo}/>
+            </div>
+
+          <div className="form-group">
+            <div className="form-row">
+              <div className="col-md-6">
+                <div className="">
+                  <label htmlFor="firstName">
                     First Name
                 </label>
                 <input type="text" id="firstName" onChange={this.handleChange} className="form-control"/>
-            </div>
-            <div className='form-group'>
-                <label htmlFor="lastName">
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="">
+                  <label htmlFor="lastName">
                     Last Name
                 </label>
                 <input type="text" id="lastName" onChange={this.handleChange} className="form-control"/>
+                </div>
+              </div>
             </div>
-            <div className='form-group'>
-                <label htmlFor="email">
+          </div>
+          <div class="form-group">
+            <div class="">
+              <label htmlFor="email">
                     Email
                 </label>
                 <input type="email" id="email" onChange={this.handleChange} className="form-control"/>
             </div>
-            <div className='form-group'>
-                <label htmlFor="password">
+          </div>
+          <div class="form-group">
+            <div class="">
+              <label htmlFor="password">
                     Password
                 </label>
                 <input type="password" id="password" onChange={this.handleChange} className="form-control"/>
             </div>
+          </div>
+          <div class="form-group">
             <div>
                 <label htmlFor="role">
                     Role
@@ -76,11 +89,13 @@ class SignUp extends Component {
                     <option value="registrar">Registrar</option>
                 </select>
             </div>
-            </fieldset>
-            <div>
-                <button id="signin" className="btn btn-block btn-outline-info" type="submit">Sign Up Lecturer</button>
-            </div>
+          </div>
+          
+          <button className="btn btn-outline-primary btn-block" type="submit">Register</button>
         </form>
+        
+      </div>
+      </div>
       </div>
     )
   }

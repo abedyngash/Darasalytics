@@ -4,6 +4,7 @@ const LecturersList = ({lecs}) => {
     return (
         <div className="content-section">
             <h2>Lecturers</h2>
+            {lecs.length}
             {lecs && lecs.map(lec => {
                 // console.log(lec.id)
                 return(

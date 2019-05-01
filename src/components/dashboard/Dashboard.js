@@ -1,44 +1,68 @@
 import React, {Component} from 'react';
-import AttendanceList from '../attendance/AttendanceList';
+
 import LecturersList from '../attendance/LecturersList';
 import { connect } from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 
+import RegistrarDashboard from './RegistrarDashboard';
+import LecDashboard from './LecturerDashboard';
 
 class Dashboard extends Component {
+
     render(){
-        // console.log(this.props)
-        const { lecs, auth, lecteachs } = this.props;
+        const { lecs, auth, lecteachs, profile } = this.props;
+        
         if(!auth.uid) return <Redirect to='/login' />
         return (
-           
-            <div className="row">
+           <div id="content-wrapper">
+
+            {(() => {
+                switch (profile.role) {
+                  case "registrar":  
+                    return (
+                            <RegistrarDashboard lecs={lecs}/>
+                        );
+                  case "lecturer": 
+                    return (
+                            <LecDashboard lecteachs={lecteachs} />
+                        );
+                  case "dean":  
+                    return "#0000FF";
+                  default:      
+                    return (
+                        <div className="container">
+                            <div className="card">
+                                <div className="card-header">Please Wait for a moment</div>
+                                <div className="card-body">
+                                    Loading Dashboard ...
+                                </div>
+                            </div>
+                        </div>
+                        );
+                }
+            })()}
+
                 
-                <div className="col-md-8">
-                    <AttendanceList lecteachs={lecteachs} auth={auth}/>
-                </div>
-                <div className="col-md-4">
-                    <LecturersList lecs={lecs}/>
-                </div>
             </div>
+            
         )
     }
     
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state);
+    console.log(state);
     const dbReceived = state.firestore && state.firestore.ordered && state.firestore.ordered.LecTeachTime;
     const units = dbReceived ? state.firestore.ordered.LecTeachTime : [];
     // console.log(units)
     // const courses = units[0];
     return {
-        lecs: state.firestore.ordered.Lecturers,
+        lecs: state.firestore.ordered.Staff,
         lecteachs: units,
         auth: state.firebase.auth,
-        // courses : courses
+        profile: state.firebase.profile
     }
 }
 
@@ -49,7 +73,11 @@ export default compose(
     connect(mapStateToProps),
     firestoreConnect([
         {
-            collection : 'Lecturers',          
+            collection : 'Staff', 
+            where: [
+                ['role', '==', 'lecturer'],
+               
+            ],        
         }
     ]),
     firestoreConnect(props => [
