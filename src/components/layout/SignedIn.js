@@ -9,7 +9,7 @@ const SignedIn = (props) => {
         <div className="navbar-nav">
             <NavLink className="nav-item nav-link" to="/add_user">Add New User</NavLink>
             <NavLink className="nav-item nav-link" to="">Graphical Analysis</NavLink>
-            <NavLink className="nav-item nav-link inset text-center" to="">{props.profile.initials}</NavLink>
+            <NavLink className="nav-item nav-link inset text-center" to=""><p>{props.profile.initials}</p></NavLink>
             <a onClick={props.signOut} href="" className="nav-item nav-link">Logout</a>
         </div>
     )

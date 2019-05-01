@@ -114,3 +114,7 @@ a:hover {
   background-color: #333 !important;
   z-index: 999;
 }
+
+.inset p {
+  margin-top: 5px;
+}
