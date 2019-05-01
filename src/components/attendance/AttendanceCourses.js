@@ -34,7 +34,7 @@ const AttendCourses = (props) => {
                 <Tab.Content>
                     <Tab.Pane eventKey="first">
 
-                    <h5 className="border-bottom pb-2 mb-2">Attendees within the last week</h5>
+                    <h5 className="border-bottom pb-2 mb-2">Attendees within the last week - ({attendances.length})</h5>
                     
                     <div className='ml-3 font-weight-bold'>
                                      

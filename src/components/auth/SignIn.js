@@ -8,7 +8,7 @@ class SignIn extends Component {
     state = {
        email : '',
        password : '',
-       login_text : 'Login'
+       
     }
     handleChange = (e) => {
         this.setState({
@@ -18,9 +18,7 @@ class SignIn extends Component {
     handleSubmit = (e) => {
 
         e.preventDefault();
-        this.setState({
-          login_text: 'Logging in' 
-        });
+        
         this.props.signIn(this.state);
         
         
@@ -56,7 +54,7 @@ class SignIn extends Component {
             </div>
             </fieldset>
             <div>
-                <button id="signin" className="btn btn-block btn-outline-info" type="submit">{this.state.login_text}</button>
+                <button id="signin" className="btn btn-block btn-outline-info" type="submit">Login</button>
             </div>
         </form>
       </div>
