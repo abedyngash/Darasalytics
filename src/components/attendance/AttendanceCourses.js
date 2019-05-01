@@ -217,8 +217,6 @@ const mapStateToProps = (state) => {
 
 const my_date = new Date();
 const timestamp = my_date.getTime();
-const new_timestamp = Math.round(timestamp/1000)*1000 //1000 * (timestamp / 1000)
-console.log(new_timestamp)
 
 const begin_date = firebase.firestore.Timestamp.fromDate(new Date(
     // 1548855907000
@@ -235,9 +233,12 @@ const end_date = firebase.firestore.Timestamp.fromDate(new Date(
     moment().endOf("week").toDate()
     ));
 
+
+
 console.log(begin_date)
 console.log(end_date)
-console.log(today)
+// console.log(moment(moment().endOf('month') - moment().startOf('month')).weeks())
+
 
 export default compose(
     connect(mapStateToProps),
