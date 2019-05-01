@@ -31,6 +31,18 @@ const authReducer = (state = initState, action) => {
                 ...state, 
                 authError: action.err.message.toString()
             };
+        case 'SIGNUP_SUPERUSER_SUCCESS':
+            console.log('superuser signup success')
+            return{
+                ...state,
+                authError: null
+            };
+        case 'SIGNUP_SUPERUSER_ERROR':
+        console.log('superuser signup error');
+            return {
+                ...state, 
+                authError: action.err.message.toString()
+            };
         default:
             return state;
     }

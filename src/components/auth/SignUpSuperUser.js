@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import mainLogo from '../../launcher.png'
 import {connect} from 'react-redux';
-import {signIn} from '../../store/actions/authActions';
+import {signUpSuperUser} from '../../store/actions/authActions';
 import {Redirect} from 'react-router-dom';
 
 class SignUpSuperUser extends Component {
@@ -19,24 +19,26 @@ class SignUpSuperUser extends Component {
     handleSubmit = (e) => {
 
         e.preventDefault();
-        console.log(this.state)
+        this.props.signUpSuperUser(this.state)
         
     }
   render() {
+    const {authError, auth,} = this.props;
+    // if(auth.uid) return <Redirect to='/' />
     
     return (
       <div className="container content-section">
         <form onSubmit={this.handleSubmit}>
         
-          {/*{authError ? <div className="alert alert-danger">{authError}<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+          {authError ? <div className="alert alert-danger">{authError}<button type="button" className="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button></div> : null }*/}
+          </button></div> : null }
         
         <div className="text-center">
             <img className="pt-3 account-img" src={mainLogo}/>
         </div>
         <fieldset className="form-group">
-				<legend className="border-bottom mb-4 pt-3 text-center"> Add New SuperUser</legend>
+                <legend className="border-bottom mb-4 pt-3 text-center"> Add New Lecturer</legend>
             <div className='form-group'>
                 <label htmlFor="firstName">
                     First Name
@@ -71,5 +73,18 @@ class SignUpSuperUser extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  }
+}
 
-export default SignUpSuperUser;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUpSuperUser : (newUser) => dispatch(signUpSuperUser(newUser))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps) (SignUpSuperUser);
