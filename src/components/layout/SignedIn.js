@@ -5,6 +5,7 @@ import {signOut} from '../../store/actions/authActions'
 import { NavDropdown } from 'react-bootstrap';
 
 const SignedIn = (props) => {
+    
     return (
         <div className="navbar-nav">
             <NavLink className="nav-item nav-link" to="/add_user">Add New User</NavLink>

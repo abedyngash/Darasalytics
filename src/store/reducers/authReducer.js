@@ -8,7 +8,7 @@ const authReducer = (state = initState, action) => {
         console.log('login error');
             return {
                 ...state, 
-                authError: action.err.message.toString()
+                authError: "Invalid Credentials"
             };
         case 'LOGIN_SUCCESS':
             console.log('login success');
