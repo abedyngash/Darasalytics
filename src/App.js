@@ -9,12 +9,14 @@ import SignUp from './components/auth/SignUp';
 
 
 class App extends Component {
-
+  
   render() {
+
     return (
       <BrowserRouter>
         <div>
-          <Navbar/>
+          <Navbar />
+
           <div id="wrapper">
                 <ul className="sidebar navbar-nav">
                   <li className="nav-item active">

@@ -36,54 +36,52 @@ const AttendCourses = (props) => {
 
                     <h5 className="border-bottom pb-2 mb-2">Attendees within the last week - ({attendances.length})</h5>
                     
-                    <div className='ml-3 font-weight-bold'>
-                                     
-                                <div className="row">
-                                    <div className="col-md-1">
-                                        S.No
-                                    </div>
-                                    <div className="col-md-3">
-                                        Name
-                                    </div>
-                                    <div className="col-md-4">
-                                        Date of Attendance
-                                    </div>
-                                    <div className="col-md-4">
-                                        Reg Number 
-                                    </div>
-                                </div>
-                            </div>
 
-                    {attendances && attendances.map((attendance, index) => {
-                        return(
-                            
-                        <div>
-                            <h6> 
+                    {attendances.length == 0 ? 
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                  <tr>
+                                    <th>S/No</th>
+                                    <th>Name of Student</th>
+                                    <th>Date Attended</th>
+                                    <th>Reg Number</th>
+                                  </tr>
+                                </thead>
                                 
-                                <div className='card card-header'>
-                                     
-                                    <div className="row">
-                                        <div className="col-md-1">
-                                            {index + 1} :
-                                        </div>
-                                        <div className="col-md-3">
-                                            { attendance.studname}
-                                        </div>
-                                        <div className="col-md-4">
-                                            {moment(attendance.date.toDate()).calendar()}
-                                        </div>
-                                        <div className="col-md-4">
-                                            {attendance.regno} 
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </h6>
+                                <tbody>
+                                    <tr>
+                                        <td colspan='4' className="text-center">No data available</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        )
-                    
-
-                    })}
+                        :
+                        attendances.map((attendance, index) => {
+                             return(
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                          <tr>
+                                            <th>S/No</th>
+                                            <th>Name of Student</th>
+                                            <th>Date Attended</th>
+                                            <th>Reg Number</th>
+                                          </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                            <td>{index + 1}</td>
+                                            <td>{ attendance.studname}</td>
+                                            <td>{moment(attendance.date.toDate()).calendar()}</td>
+                                            <td>{attendance.regno}</td>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                );
+                          })
+                    }
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                         <h5 className="border-bottom pb-2 mb-2">Attendees within the last month</h5>
@@ -142,23 +140,6 @@ const AttendCourses = (props) => {
                     <Tab.Pane eventKey="third">
                         <h5 className="border-bottom pb-2 mb-2">Attendees within the semester</h5>
                     
-                    <div className='ml-3 font-weight-bold'>
-                                     
-                                <div className="row">
-                                    <div className="col-md-1">
-                                        S.No
-                                    </div>
-                                    <div className="col-md-3">
-                                        Name
-                                    </div>
-                                    <div className="col-md-4">
-                                        Date of Attendance
-                                    </div>
-                                    <div className="col-md-4">
-                                        Reg Number 
-                                    </div>
-                                </div>
-                            </div>
 
                     {attendances && attendances.map((attendance, index) => {
                         // console.log(attendance.date)

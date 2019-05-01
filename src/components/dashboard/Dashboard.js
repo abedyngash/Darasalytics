@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import LecturersList from '../attendance/LecturersList';
+
 import { connect } from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -26,7 +26,7 @@ class Dashboard extends Component {
                         );
                   case "lecturer": 
                     return (
-                            <LecDashboard lecteachs={lecteachs} />
+                            <LecDashboard lecteachs={lecteachs} lecs={lecs}/>
                         );
                   case "dean":  
                     return "#0000FF";
@@ -84,7 +84,7 @@ export default compose(
         {
             collection : 'LecTeachTime',
             where: [
-                ['lecid', '==', props.auth.uid ? props.auth.uid : null],
+                ['lecid', '==', props.auth.uid],
                 ['studyyear', '==', current_year]
             ],
             
