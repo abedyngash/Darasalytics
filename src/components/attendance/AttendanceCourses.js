@@ -55,12 +55,9 @@ const AttendCourses = (props) => {
                             </div>
 
                     {attendances && attendances.map((attendance, index) => {
-                        console.log(attendance.date)
                         return(
-                        <div>
-
                             
-
+                        <div>
                             <h6> 
                                 
                                 <div className='card card-header'>
@@ -82,9 +79,10 @@ const AttendCourses = (props) => {
                                 </div>
 
                             </h6>
-                        
                         </div>
                         )
+                    
+
                     })}
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
@@ -109,7 +107,7 @@ const AttendCourses = (props) => {
                             </div>
 
                     {attendances && attendances.map((attendance, index) => {
-                        console.log(attendance.date)
+                        // console.log(attendance.date)
                         return(
                         <div>
 
@@ -163,7 +161,7 @@ const AttendCourses = (props) => {
                             </div>
 
                     {attendances && attendances.map((attendance, index) => {
-                        console.log(attendance.date)
+                        // console.log(attendance.date)
                         return(
                         <div>
 
@@ -203,7 +201,7 @@ const AttendCourses = (props) => {
 }
 
 const mapStateToProps = (state) => {
-   console.log(state)
+   // console.log(state)
     
     const dbReceived = state.firestore && state.firestore.data.StudentScanClass;
     
@@ -223,17 +221,23 @@ const new_timestamp = Math.round(timestamp/1000)*1000 //1000 * (timestamp / 1000
 console.log(new_timestamp)
 
 const begin_date = firebase.firestore.Timestamp.fromDate(new Date(
-1548855907000
-//1556614782000
-// new_timestamp
+    // 1548855907000
+    moment().startOf("week").toDate()
     ));
 
-const end_date = firebase.firestore.Timestamp.fromDate(new Date(
-1552038838000
-// 1556614782000
-// new_timestamp
+const today = firebase.firestore.Timestamp.fromDate(new Date(
+    timestamp
     ));
-// console.log(begin_date)
+
+
+const end_date = firebase.firestore.Timestamp.fromDate(new Date(
+    // 1552038838000
+    moment().endOf("week").toDate()
+    ));
+
+console.log(begin_date)
+console.log(end_date)
+console.log(today)
 
 export default compose(
     connect(mapStateToProps),

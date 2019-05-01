@@ -7,7 +7,8 @@ import {Redirect} from 'react-router-dom';
 class SignIn extends Component {
     state = {
        email : '',
-       password : ''
+       password : '',
+       login_text : 'Login'
     }
     handleChange = (e) => {
         this.setState({
@@ -15,12 +16,17 @@ class SignIn extends Component {
         })
     }
     handleSubmit = (e) => {
+
         e.preventDefault();
+        this.setState({
+          login_text: 'Logging in' 
+        });
         this.props.signIn(this.state);
-        e.target.signin.value = "Logging in ..."
+        
+        
     }
   render() {
-    const {authError, auth} = this.props;
+    const {authError, auth,} = this.props;
     if(auth.uid) return <Redirect to='/' />
     return (
       <div className="container content-section">
@@ -50,7 +56,7 @@ class SignIn extends Component {
             </div>
             </fieldset>
             <div>
-                <button id="signin" className="btn btn-block btn-outline-info" type="submit">Login</button>
+                <button id="signin" className="btn btn-block btn-outline-info" type="submit">{this.state.login_text}</button>
             </div>
         </form>
       </div>
