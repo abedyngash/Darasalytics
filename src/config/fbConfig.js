@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+// import * as admin from 'firebase-admin';
 
 var config = {
     apiKey: "AIzaSyATsOBvPIaOwQUfV6WDy4yzm2dRUm-kXdE",
@@ -13,5 +14,11 @@ var config = {
 
 firebase.initializeApp(config);
 firebase.firestore().settings({timestampsInSnapshots:true})
+
+// admin.initializeApp({
+//   credential: admin.credential.applicationDefault(),
+//   databaseURL: 'https://showcase-3debf.firebaseio.com'
+// });
+
 
 export default firebase;

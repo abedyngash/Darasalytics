@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import mainLogo from '../../launcher.png'
 import {connect} from 'react-redux';
-import {signIn} from '../../store/actions/authActions';
+import {signUpLec} from '../../store/actions/authActions';
 import {Redirect} from 'react-router-dom';
 
 class SignUpLec extends Component {
@@ -19,18 +19,20 @@ class SignUpLec extends Component {
     handleSubmit = (e) => {
 
         e.preventDefault();
-        console.log(this.state)
+        this.props.signUpLec(this.state)
         
     }
   render() {
+    const {authError, auth,} = this.props;
+    // if(auth.uid) return <Redirect to='/' />
     
     return (
       <div className="container content-section">
         <form onSubmit={this.handleSubmit}>
         
-          {/*{authError ? <div className="alert alert-danger">{authError}<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+          {authError ? <div className="alert alert-danger">{authError}<button type="button" className="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button></div> : null }*/}
+          </button></div> : null }
         
         <div className="text-center">
             <img className="pt-3 account-img" src={mainLogo}/>
@@ -71,5 +73,18 @@ class SignUpLec extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  }
+}
 
-export default SignUpLec;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUpLec : (newUser) => dispatch(signUpLec(newUser))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps) (SignUpLec);

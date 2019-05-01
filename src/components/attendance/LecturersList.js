@@ -9,7 +9,7 @@ const LecturersList = ({lecs}) => {
                 return(
                     <div key={lec.id} className='card'>
                         <div className='card-header'>
-                            <p>{lec.full_name}</p>
+                            <p>{lec.firstName} {lec.lastName}</p>
                             <small className="text-muted">{lec.email}</small>
                         </div>
                     </div>

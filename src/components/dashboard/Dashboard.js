@@ -17,7 +17,7 @@ class Dashboard extends Component {
             <div className="row">
                 
                 <div className="col-md-8">
-                    <AttendanceList lecteachs={lecteachs}/>
+                    <AttendanceList lecteachs={lecteachs} auth={auth}/>
                 </div>
                 <div className="col-md-4">
                     <LecturersList lecs={lecs}/>
