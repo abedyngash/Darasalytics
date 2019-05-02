@@ -216,8 +216,8 @@ const end_date = firebase.firestore.Timestamp.fromDate(new Date(
 
 
 
-console.log(begin_date)
-console.log(end_date)
+// console.log(begin_date)
+// console.log(end_date)
 // console.log(moment(moment().endOf('month') - moment().startOf('month')).weeks())
 
 

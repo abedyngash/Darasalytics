@@ -10,9 +10,18 @@ import RegistrarDashboard from './RegistrarDashboard';
 import LecDashboard from './LecturerDashboard';
 
 class Dashboard extends Component {
+    object_size = function(obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
 
     render(){
-        const { lecs, auth, lecteachs, profile } = this.props;
+        const { lecs, auth, lecteachs, profile, courses, students } = this.props;
+        const course_length = this.object_size(courses && courses[0])
+        // console.log(course_length)
         
         if(!auth.uid) return <Redirect to='/login' />
         return (
@@ -22,11 +31,17 @@ class Dashboard extends Component {
                 switch (profile.role) {
                   case "registrar":  
                     return (
-                            <RegistrarDashboard lecs={lecs}/>
+                            <RegistrarDashboard 
+                                lecs={lecs} 
+                                profile={profile}
+                                courses={courses}
+                                course_length={course_length}
+                                students={students}
+                                />
                         );
                   case "lecturer": 
                     return (
-                            <LecDashboard lecteachs={lecteachs} lecs={lecs}/>
+                            <LecDashboard lecteachs={lecteachs} profile={profile}/>
                         );
                   case "dean":  
                     return "#0000FF";
@@ -53,7 +68,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    // console.log(state);
     const dbReceived = state.firestore && state.firestore.ordered && state.firestore.ordered.LecTeachTime;
     const units = dbReceived ? state.firestore.ordered.LecTeachTime : [];
     // console.log(units)
@@ -62,7 +77,9 @@ const mapStateToProps = (state) => {
         lecs: state.firestore.ordered.Staff,
         lecteachs: units,
         auth: state.firebase.auth,
-        profile: state.firebase.profile
+        profile: state.firebase.profile,
+        courses : state.firestore.ordered.DkutCourses,
+        students: state.firestore.ordered.StudentDetails
     }
 }
 
@@ -84,10 +101,24 @@ export default compose(
         {
             collection : 'LecTeachTime',
             where: [
-                ['lecid', '==', props.auth.uid],
+                ['lecid', '==', props.auth.uid ? props.auth.uid : null],
                 ['studyyear', '==', current_year]
             ],
             
+        }
+    ]),
+    firestoreConnect(props => [
+        {
+            collection : 'DkutCourses',
+            doc : 'dkut'
+            
+            
+        }
+    ]),
+    firestoreConnect(props => [
+        {
+            collection : 'StudentDetails',
+                      
         }
     ])
    
