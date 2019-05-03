@@ -2,7 +2,6 @@ import React from 'react';
 
 const LecturersList = (props) => {
     const { lecs } = props.location.state
-    console.log(lecs)
         return (
         <div className="container-fluid content-section">
             <ol className="breadcrumb">
@@ -15,14 +14,15 @@ const LecturersList = (props) => {
             <div className="content-section row">
             
             {lecs && lecs.map(lec => {
-                // console.log(lec.id)
                 return(
+                <div class="col-md-4">                  
                     <div key={lec.id} className='card lec-cards'>
                         <div className='card-header'>
                             <p>{lec.firstName} {lec.lastName}</p>
                             <small className="text-muted">{lec.email}</small>
                         </div>
                     </div>
+                </div>
                 )
             })}
             

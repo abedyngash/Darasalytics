@@ -44,7 +44,7 @@ class RegistrarDashboard extends React.Component {
                       <div className="card-body-icon">
                         <i className="fas fa-sm fa-user"></i>
                       </div>
-                      <div className="mr-5">{lecs && lecs.length} Lecturer(s)</div>
+                      <div className="mr-5">{lecs && lecs.length} Lecturers</div>
                     </div>
                     <div className="card-footer text-white clearfix small z-1">
                       <Link to={{
@@ -81,12 +81,14 @@ class RegistrarDashboard extends React.Component {
                       </div>
                       <div className="mr-5">{students && students.length} Students</div>
                     </div>
-                    <a className="card-footer text-white clearfix small z-1" href="#">
-                      <span className="float-left">View Details</span>
-                      <span className="float-right">
-                        <i className="fas fa-angle-right"></i>
-                      </span>
-                    </a>
+                    <div className="card-footer text-white clearfix small z-1">
+                      <Link to={{
+                        pathname: '/students',
+                        state: {
+                          students : students
+                        }
+                      }}><span className="text-white"> View Details</span></Link>
+                    </div>
                   </div>
                 </div>
                 

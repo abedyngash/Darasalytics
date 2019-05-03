@@ -7,6 +7,7 @@ import AttendanceDetail from './components/attendance/AttendanceDetail';
 import LecturersList from './components/attendance/LecturersList';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
+import StudentsList from './components/attendance/StudentsList';
 // import TestTable from './components/attendance/TestTable';
 
 class App extends Component {
@@ -32,25 +33,18 @@ class App extends Component {
                       <span>Pages</span>
                     </a>
                     <div className="dropdown-menu" aria-labelledby="pagesDropdown">
-                      <h6 className="dropdown-header">Login Screens:</h6>
+                      <h6 className="dropdown-header">Authentication Screens:</h6>
                       <a className="dropdown-item" href="/add_user">Add User</a>
-                      <a className="dropdown-item" href="register.html">Register</a>
-                      <a className="dropdown-item" href="forgot-password.html">Forgot Password</a>
+                      <a className="dropdown-item" href="">Forgot Password</a>
                       <div className="dropdown-divider"></div>
                       <h6 className="dropdown-header">Other Pages:</h6>
-                      <a className="dropdown-item" href="404.html">404 Page</a>
-                      <a className="dropdown-item" href="blank.html">Blank Page</a>
+                      
                     </div>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="charts.html">
                       <i className="fas fa-fw fa-chart-area"></i>
-                      <span>Charts</span></a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="tables.html">
-                      <i className="fas fa-fw fa-table"></i>
-                      <span>Tables</span></a>
+                      <span>Graphical Analysis</span></a>
                   </li>
                 </ul>
             
@@ -64,6 +58,8 @@ class App extends Component {
               <Route path='/add_user' component={SignUp}/>
 
               <Route path='/lecs' component={LecturersList}/>
+
+              <Route path='/students' component={StudentsList}/>
             </Switch>
           </div>
 
