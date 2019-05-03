@@ -8,6 +8,8 @@ import LecturersList from './components/attendance/LecturersList';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import StudentsList from './components/attendance/StudentsList';
+import CoursesList from './components/attendance/CoursesList';
+
 // import TestTable from './components/attendance/TestTable';
 
 class App extends Component {
@@ -60,6 +62,8 @@ class App extends Component {
               <Route path='/lecs' component={LecturersList}/>
 
               <Route path='/students' component={StudentsList}/>
+
+              <Route path='/courses' component={CoursesList}/>
             </Switch>
           </div>
 

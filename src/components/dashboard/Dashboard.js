@@ -15,7 +15,7 @@ class Dashboard extends Component {
         for (key in obj) {
             if (obj.hasOwnProperty(key)) size++;
         }
-        return size;
+        return size - 1;
     };
 
     render(){
