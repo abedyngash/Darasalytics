@@ -59,7 +59,7 @@ const SignedIn = (props) => {
                     <div class="modal-body">Are you sure you want to log out?</div>
                     <div class="modal-footer">
                       <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                      <a class="btn btn-danger" onClick={props.signOut} href="#">Logout</a>
+                      <button class="btn btn-danger" type="button" onClick={props.signOut} >Logout</button>
                     </div>
                   </div>
                 </div>

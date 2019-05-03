@@ -13,6 +13,8 @@ import moment from 'moment';
 
 const AttendCourses = (props) => {
 	const {attendances} = props;
+
+    // console.log(attendances && attendances[0].studname)
 	
     return (
         <div>
@@ -200,8 +202,8 @@ const my_date = new Date();
 const timestamp = my_date.getTime();
 
 const begin_date = firebase.firestore.Timestamp.fromDate(new Date(
-    // 1548855907000
-    moment().startOf("week").toDate()
+    1548855907000
+    // moment().startOf("week").toDate()
     ));
 
 const today = firebase.firestore.Timestamp.fromDate(new Date(
@@ -210,8 +212,8 @@ const today = firebase.firestore.Timestamp.fromDate(new Date(
 
 
 const end_date = firebase.firestore.Timestamp.fromDate(new Date(
-    // 1552038838000
-    moment().endOf("week").toDate()
+    1552038838000
+    // moment().endOf("week").toDate()
     ));
 
 

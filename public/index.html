@@ -12,13 +12,15 @@
 
     <link href="%PUBLIC_URL%/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-  <!-- Page level plugin CSS-->
-  <link href="%PUBLIC_URL%/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Page level plugin CSS-->
+    <link href="%PUBLIC_URL%/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-  <link href="%PUBLIC_URL%/css/sb-admin.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="%PUBLIC_URL%/css/sb-admin.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/main.css">
+
+    <link rel="stylesheet" href="%PUBLIC_URL%/jquery.datatables.css">
     <title>Darasalytics</title>
 </head>
   <body id="page-top">
@@ -45,6 +47,23 @@
   <!-- Demo scripts for this page-->
   <script src="%PUBLIC_URL%/js/demo/datatables-demo.js"></script>
   <script src="%PUBLIC_URL%/js/demo/chart-area-demo.js"></script>
+
+  <script>
+    $(document).ready(function() {
+        // alert("Heeey");
+
+        $('#dataTable,#disbursement_table,#users_table,#school_ward_detail_table').dataTable({
+              dom: 'Blfrtip',
+              buttons: [
+                  { extend: 'copy', text: 'Copy to clipboard' },
+                  { extend: 'excel', text: 'Export to Sheets' },
+                  { extend: 'pdf', text: 'Export to PDF' },
+                  { extend: 'print', text: 'Print' }
+              ],
+              
+            });
+    })
+  </script>
   </body>
   
 </html>

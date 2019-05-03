@@ -1,14 +1,23 @@
 import React from 'react';
 
-const LecturersList = ({lecs}) => {
-    return (
-        <div className="content-section">
+const LecturersList = (props) => {
+    const { lecs } = props.location.state
+    console.log(lecs)
+        return (
+        <div className="container-fluid content-section">
+            <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                  <a href="/">Dashboard</a>
+                </li>
+                <li className="breadcrumb-item active">Lecturers</li>
+              </ol>
             <h2>Lecturers</h2>
+            <div className="content-section row">
             
             {lecs && lecs.map(lec => {
                 // console.log(lec.id)
                 return(
-                    <div key={lec.id} className='card'>
+                    <div key={lec.id} className='card lec-cards'>
                         <div className='card-header'>
                             <p>{lec.firstName} {lec.lastName}</p>
                             <small className="text-muted">{lec.email}</small>
@@ -17,9 +26,10 @@ const LecturersList = ({lecs}) => {
                 )
             })}
             
-            
+            </div>
         </div>
-    );
+    )
+    
 }
 
 export default LecturersList;
