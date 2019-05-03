@@ -7,7 +7,7 @@ import AttendanceDetail from './components/attendance/AttendanceDetail';
 import LecturersList from './components/attendance/LecturersList';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
-// import TestTable from './components/attendance/TestTable';
+import TestTable from './components/attendance/TestTable';
 
 class App extends Component {
     
@@ -62,6 +62,8 @@ class App extends Component {
               <Route path='/login' component={SignIn}/>
               
               <Route path='/add_user' component={SignUp}/>
+
+              <Route path='/tables' component={TestTable}/>
 
               <Route path='/lecs' component={LecturersList}/>
             </Switch>
