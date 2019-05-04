@@ -4,6 +4,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Tabs, Tab, Nav, Col, Row } from 'react-bootstrap';
 import AttendCourses from './AttendanceCourses';
+import { Redirect } from 'react-router-dom';
 
 var COURSE_INDEX = 1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ;
 
@@ -25,8 +26,8 @@ class AttendanceDetail extends React.Component {
         this.handleSelect = this.handleSelect.bind(this);
         
                 
-        const {single_class, courses} = this.props;
-        
+        const {single_class, courses, auth} = this.props;
+        if(!auth.uid) return <Redirect to='/login' />
         
         console.log(this.state.index);
         if(single_class) {
@@ -114,7 +115,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         single_class: single_class,
         courses: courses,
-       
+        auth: state.firebase.auth
         
     }
 }

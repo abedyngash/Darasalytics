@@ -37,11 +37,12 @@ class Dashboard extends Component {
                                 courses={courses}
                                 course_length={course_length}
                                 students={students}
+                                auth={auth}
                                 />
                         );
                   case "lecturer": 
                     return (
-                            <LecDashboard lecteachs={lecteachs} profile={profile}/>
+                            <LecDashboard profile={profile} />
                         );
                   case "dean":  
                     return "#0000FF";

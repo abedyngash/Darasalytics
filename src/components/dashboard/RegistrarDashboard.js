@@ -26,7 +26,7 @@ class RegistrarDashboard extends React.Component {
     }
 
     render() {
-	   const {lecs, courses, course_length, students} = this.props;
+	   const {lecs, courses, course_length, students, auth} = this.props;
     
       return (
           <div className="container-fluid">
@@ -50,7 +50,8 @@ class RegistrarDashboard extends React.Component {
                       <Link to={{
                         pathname: '/lecs',
                         state: {
-                          lecs : lecs
+                          lecs : lecs,
+                          auth : auth
                         }
                       }}><span className="text-white"> View Details</span></Link>
                     </div>
@@ -69,7 +70,8 @@ class RegistrarDashboard extends React.Component {
                       <Link to={{
                         pathname: '/courses',
                         state: {
-                          courses : courses
+                          courses : courses,
+                          auth : auth
                         }
                       }}><span className="text-white"> View Details</span></Link>
                     </div>
@@ -87,7 +89,8 @@ class RegistrarDashboard extends React.Component {
                       <Link to={{
                         pathname: '/students',
                         state: {
-                          students : students
+                          students : students,
+                          auth : auth
                         }
                       }}><span className="text-white"> View Details</span></Link>
                     </div>

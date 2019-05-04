@@ -4,6 +4,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Dashboard from './components/dashboard/Dashboard';
 import AttendanceDetail from './components/attendance/AttendanceDetail';
+import AttendanceList from './components/attendance/AttendanceList';
 import LecturersList from './components/attendance/LecturersList';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
@@ -60,6 +61,8 @@ class App extends Component {
               <Route path='/add_user' component={SignUp}/>
 
               <Route path='/lecs' component={LecturersList}/>
+
+              <Route path='/lecs/:id' component={AttendanceList}/>
 
               <Route path='/students' component={StudentsList}/>
 

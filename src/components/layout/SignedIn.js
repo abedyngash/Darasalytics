@@ -42,7 +42,7 @@ const SignedIn = (props) => {
                   <a className="dropdown-item" href="#">Settings</a>
                   <a className="dropdown-item" href="#">Activity Log</a>
                   <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                  <a className="dropdown-item" onClick={props.signOut} href="">Logout</a>
                 </div>
               </li>
             </ul>

@@ -1,6 +1,11 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const CoursesList = (props) => {
+    const {auth} = props;
+    
+    if(!auth.uid) return <Redirect to='/login' />
     const { courses } = props.location.state;
     const dkut_courses = courses && courses[0]
     console.log((dkut_courses))
@@ -48,4 +53,14 @@ const CoursesList = (props) => {
     
 }
 
-export default CoursesList;
+
+const mapStateToProps = (state, ownProps) => {
+   
+    return {
+       
+        auth: state.firebase.auth
+        
+    }
+}
+
+export default connect(mapStateToProps) (CoursesList);

@@ -1,7 +1,12 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const StudentsList = (props) => {
+    const {auth} = props;
+    if(!auth.uid) return <Redirect to='/login' />
     const { students } = props.location.state;
+   
     return (
         <div className="container-fluid content-section">
             <ol className="breadcrumb">
@@ -36,4 +41,14 @@ const StudentsList = (props) => {
     
 }
 
-export default StudentsList;
+const mapStateToProps = (state, ownProps) => {
+   
+    return {
+       
+        auth: state.firebase.auth
+        
+    }
+}
+
+
+export default connect(mapStateToProps) (StudentsList);
