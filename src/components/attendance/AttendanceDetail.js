@@ -60,10 +60,10 @@ class AttendanceDetail extends React.Component {
                     	
                     <Tab eventKey={index} title={course.course  + " year " + course.yearofstudy}>
                     <div className="mt-4">
-                    <Tab.Container onFocus={this.handleSelect} id="left-tabs-example" defaultActiveKey="first">
+                    
                     		<AttendCourses course={course} index={this.state.index} single_class={single_class} />
                             
-                        </Tab.Container>
+                        
                     </div>
                     </Tab>
                    
