@@ -8,6 +8,8 @@ import firebase from 'firebase';
 
 import moment from 'moment';
 
+import AttendanceDuration from './AttendanceDuration';
+
 // import * as admin from 'firebase-admin';
 
 
@@ -20,90 +22,52 @@ class AttendCourses extends React.Component {
 
     }
 
-    handleSelect(key) {
-        console.log(parseInt(key));
-        // this.setState({index: parseInt(key)})
+    handleSelect(key, props) {
+        this.setState({index: parseInt(key)})
         
     }
-
     render() {
+        this.handleSelect = this.handleSelect.bind(this);
        
-	const {attendances} = this.props;
+    	const {attendances} = this.props;
 
-    // console.log(attendances && attendances[0].studname)
-    const attendances_objects = ['Weekly Attendance', 'Monthly Attendance', 'Semester Wise']
-	
-    return (
-        <div>
-        <Tab.Container id="left-tabs-example" onSelect={this.handleSelect} defaultActiveKey={0}>
-        	<Row>
-                <Col sm={3}>
-                <Nav variant="pills" className="flex-column card card-header">
+        console.log(this.state)
+        const attendances_objects = ['Weekly Attendance', 'Monthly Attendance', 'Semester Wise']
+    	
+        return (
+            <div>
+            <Tab.Container id="left-tabs-example" onSelect={this.handleSelect} defaultActiveKey={0}>
+            	<Row>
+                    <Col sm={3}>
+                    <Nav variant="pills" className="flex-column card card-header">
+                        {attendances_objects.map((item, index) => {
+                            return (
+                                    <Nav.Item>
+                                        <Nav.Link eventKey={index}>{item}</Nav.Link>
+                                    </Nav.Item>
+                                )
+                        })}
+                        
+                    </Nav>
+                    </Col>
+                    <Col sm={9}>
+                    <Tab.Content>
                     {attendances_objects.map((item, index) => {
-                        return (
-                                <Nav.Item>
-                                    <Nav.Link eventKey={index}>{item}</Nav.Link>
-                                </Nav.Item>
-                            )
-                    })}
-                    
-                </Nav>
-                </Col>
-                <Col sm={9}>
-                <Tab.Content>
-                {attendances_objects.map((item, index) => {
-                    return(
-                        <Tab.Pane eventKey={index}>
-
-                            <h5 className="border-bottom pb-2 mb-2">Attendees within the last week - ({attendances.length})</h5>
-                            
-
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                          <tr>
-                                            <th>S/No</th>
-                                            <th>Name of Student</th>
-                                            <th>Date Attended</th>
-                                            <th>Reg Number</th>
-                                          </tr>
-                                        </thead>
-                            {attendances.length == 0 ? 
-                                        
-                                        <tbody>
-                                            <tr>
-                                                <td colspan='4' className="text-center">No data available</td>
-                                            </tr>
-                                        </tbody>
-                                :
-                                attendances.map((attendance, index) => {
-                                     return(
-                                        
-                                                <tbody>
-                                                    <td>{index + 1}</td>
-                                                    <td>{ attendance.studname}</td>
-                                                    <td>{moment(attendance.date.toDate()).calendar()}</td>
-                                                    <td>{attendance.regno}</td>
-                                                </tbody>
-                                           
-                                        
-                                        );
-                                  })
-                            }
-                                    </table>
-                                </div>
+                        return(
+                            <Tab.Pane eventKey={index}>
+                            <AttendanceDuration index={this.state.index} attendances={attendances}/>
                             </Tab.Pane>
 
-                        )
-                })}
-                    
-                    
-                </Tab.Content>
-                </Col>
-            </Row>
-            </Tab.Container>
-        </div>
-    );
+                            )
+                    })}
+                        
+                        
+                    </Tab.Content>
+                    </Col>
+                </Row>
+                </Tab.Container>
+            </div>
+        );
     }
 }
 
