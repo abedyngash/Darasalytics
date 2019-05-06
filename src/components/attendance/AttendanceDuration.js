@@ -2,10 +2,16 @@ import React from 'react';
 import { Tabs, Tab, Nav, Col, Row } from 'react-bootstrap';
 import moment from 'moment';
 
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
+import firebase from 'firebase';
+
 class AttendanceDuration extends React.Component {
 	render () {
 
-		const {index, attendances} = this.props;
+		const {attendances, index_of_tab} = this.props;
+        // console.log(this.props)
 
 		return (
 			<div>
@@ -20,7 +26,7 @@ class AttendanceDuration extends React.Component {
                                 <th>Reg Number</th>
                               </tr>
                             </thead>
-                {attendances.length == 0 ? 
+                {attendances === undefined || attendances && attendances.length == 0 ? 
                             
                             <tbody>
                                 <tr>
@@ -49,4 +55,89 @@ class AttendanceDuration extends React.Component {
 	}
 }
 
-export default AttendanceDuration;
+const mapStateToProps = (state) => {
+   // console.log(state)
+    
+    const dbReceived = state.firestore && state.firestore.data.StudentScanClass;
+    
+    const attendances = dbReceived ? state.firestore.ordered.StudentScanClass : [];
+    
+    return {
+       
+        attendances: attendances,
+       
+        
+    }
+}
+
+const my_date = new Date();
+const timestamp = my_date.getTime();
+
+const begin_date_weekly = firebase.firestore.Timestamp.fromDate(new Date(
+    1548855907000
+    // moment().startOf("week").toDate()
+    ));
+
+const today = firebase.firestore.Timestamp.fromDate(new Date(
+    timestamp
+    ));
+
+
+const end_date_weekly = firebase.firestore.Timestamp.fromDate(new Date(
+    1552038838000
+    // moment().endOf("week").toDate()
+    ));
+
+const begin_date_monthly = firebase.firestore.Timestamp.fromDate(new Date(
+    // 1548855907000
+    moment().startOf("month").toDate()
+    ));
+
+const end_date_monthly = firebase.firestore.Timestamp.fromDate(new Date(
+    // 1552038838000
+    moment().endOf("month").toDate()
+    ));
+
+
+
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect( props =>
+        {
+            const {single_class, index_of_tab, index_of_pill} = props; 
+            console.log(props)
+            if(index_of_pill == 0) {
+                return [
+                    {    
+                        collection : 'StudentScanClass',
+                        where: [
+                            ['unitcode', '==', props.single_class.unitcode],
+                            ['course', '==', props.single_class.courses[index_of_tab].course],
+                            ["date", ">", begin_date_weekly],
+                            ["date", "<", end_date_weekly],
+                            ['yearofstudy', '==', props.single_class.courses[index_of_tab].yearofstudy.toString()],
+                        ],
+                        
+                    }  
+                ]     
+            } else if (index_of_pill == 1) {
+                return [
+                    {    
+                        collection : 'StudentScanClass',
+                        where: [
+                            ['unitcode', '==', props.single_class.unitcode],
+                            ['course', '==', props.single_class.courses[index_of_tab].course],
+                            ["date", ">=", begin_date_weekly],
+                            ["date", "<=", end_date_weekly],
+                            ['yearofstudy', '==', props.single_class.courses[index_of_tab].yearofstudy.toString()],
+                        ],
+                        
+                    }  
+                ]     
+            } 
+                       
+                 
+        }
+    )
+    
+) (AttendanceDuration);

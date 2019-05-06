@@ -12,13 +12,13 @@ class AttendanceDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            index: 0 //initial state
+            index_of_tab: 0 //initial state
         }
 
       }
 
     handleSelect(key, props) {
-		this.setState({index: parseInt(key)})
+		this.setState({index_of_tab: parseInt(key)})
 		
     }
 
@@ -29,7 +29,7 @@ class AttendanceDetail extends React.Component {
         const {single_class, courses, auth} = this.props;
         if(!auth.uid) return <Redirect to='/login' />
         
-        console.log(this.state.index);
+        // console.log(this.state.index);
         if(single_class) {
             return(
             <div className='container content-section'>
@@ -61,7 +61,7 @@ class AttendanceDetail extends React.Component {
                     <Tab eventKey={index} title={course.course  + " year " + course.yearofstudy}>
                     <div className="mt-4">
                     
-                    		<AttendCourses course={course} index={this.state.index} single_class={single_class} />
+                    		<AttendCourses course={course} index_of_tab={this.state.index_of_tab} single_class={single_class} />
                             
                         
                     </div>

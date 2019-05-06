@@ -17,21 +17,22 @@ class AttendCourses extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            index: 0 //initial state
+            index_of_pill: 0 //initial state
         }
 
     }
 
     handleSelect(key, props) {
-        this.setState({index: parseInt(key)})
+        this.setState({index_of_pill: parseInt(key)})
         
     }
     render() {
         this.handleSelect = this.handleSelect.bind(this);
        
-    	const {attendances} = this.props;
+    	const {attendances, index_of_tab, single_class} = this.props;
 
-        console.log(this.state)
+
+        // console.log(this.state)
         const attendances_objects = ['Weekly Attendance', 'Monthly Attendance', 'Semester Wise']
     	
         return (
@@ -55,7 +56,7 @@ class AttendCourses extends React.Component {
                     {attendances_objects.map((item, index) => {
                         return(
                             <Tab.Pane eventKey={index}>
-                            <AttendanceDuration index={this.state.index} attendances={attendances}/>
+                            <AttendanceDuration index_of_tab={index_of_tab} index_of_pill={this.state.index_of_pill} single_class={single_class}/>
                             </Tab.Pane>
 
                             )
@@ -71,96 +72,7 @@ class AttendCourses extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-   // console.log(state)
-    
-    const dbReceived = state.firestore && state.firestore.data.StudentScanClass;
-    
-    const attendances = dbReceived ? state.firestore.ordered.StudentScanClass : [];
-	
-    return {
-       
-        attendances: attendances,
-       
-        
-    }
-}
-
-const my_date = new Date();
-const timestamp = my_date.getTime();
-
-const begin_date_weekly = firebase.firestore.Timestamp.fromDate(new Date(
-    1548855907000
-    // moment().startOf("week").toDate()
-    ));
-
-const today = firebase.firestore.Timestamp.fromDate(new Date(
-    timestamp
-    ));
 
 
-const end_date_weekly = firebase.firestore.Timestamp.fromDate(new Date(
-    1552038838000
-    // moment().endOf("week").toDate()
-    ));
 
-const begin_date_monthly = firebase.firestore.Timestamp.fromDate(new Date(
-    // 1548855907000
-    moment().startOf("month").toDate()
-    ));
-
-const end_date_monthly = firebase.firestore.Timestamp.fromDate(new Date(
-    // 1552038838000
-    moment().endOf("month").toDate()
-    ));
-
-
-// console.log(begin_date)
-// console.log(end_date)
-// console.log(moment(moment().endOf('month') - moment().startOf('month')).weeks())
-
-
-export default compose(
-    connect(mapStateToProps),
-    firestoreConnect( props =>
-        {
-            const {single_class, index} = props; 
-            
-           
-            return [
-                {    
-                    collection : 'StudentScanClass',
-					where: [
-		                ['unitcode', '==', props.single_class.unitcode],
-		                ['course', '==', props.single_class.courses[props.index].course],
-                        ["date", ">", begin_date_weekly],
-                        ["date", "<", end_date_weekly],
-		                ['yearofstudy', '==', props.single_class.courses[props.index].yearofstudy.toString()],
-		            ],
-                    
-                }  
-                ]          
-        }
-    ),
-    firestoreConnect( props =>
-        {
-            const {single_class, index} = props; 
-            
-           
-            return [
-                {    
-                    collection : 'StudentScanClass',
-                    where: [
-                        ['unitcode', '==', props.single_class.unitcode],
-                        ['course', '==', props.single_class.courses[props.index].course],
-                        ["date", ">", begin_date_weekly],
-                        ["date", "<", end_date_weekly],
-                        ['yearofstudy', '==', props.single_class.courses[props.index].yearofstudy.toString()],
-                    ],
-                    
-                }  
-                ]          
-        }
-    )
-    
-) (AttendCourses);
+export default AttendCourses;
