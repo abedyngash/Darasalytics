@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Tabs, Tab, Nav, Col, Row } from 'react-bootstrap';
-import AttendCourses from './AttendanceCourses';
-import { Redirect } from 'react-router-dom';
 
-var COURSE_INDEX = 1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ;
+import { Redirect, Link } from 'react-router-dom';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ;
 
 class AttendanceDetail extends React.Component {
     constructor(props) {
@@ -29,7 +27,6 @@ class AttendanceDetail extends React.Component {
         const {single_class, courses, auth} = this.props;
         if(!auth.uid) return <Redirect to='/login' />
         
-        // console.log(this.state.index);
         if(single_class) {
             return(
             <div className='container content-section'>
@@ -51,27 +48,54 @@ class AttendanceDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-                <h2 className='mb-5'>Toggle between the tabs below to see your attendances</h2>
-                <Tabs defaultActiveKey={0} className="card-header" onSelect={this.handleSelect} id="uncontrolled-tab-example">
+                <h2 className='mb-5'>View the Attendances Below</h2>
                 
-                { courses.map((course, index) => {
-
-                    return (
-                    	
-                    <Tab eventKey={index} title={course.course  + " year " + course.yearofstudy}>
-                    <div className="mt-4">
-                    
-                    		<AttendCourses course={course} index_of_tab={this.state.index_of_tab} single_class={single_class} />
-                            
+                <div className="row">
+                    <div className="col-md-4">
+                        <Link
+                            to = {{
+                                pathname: '/class/' + single_class.lecteachtimeid + '/weekly',
+                                state: {
+                                  courses: courses,
+                                  unitcode: single_class.unitcode,
+                                  unitname: single_class.unitname,
+                                }
+                            }}
+                        >
                         
+                           <div class="card">
+                               <div class="card-header">
+                                   Weekly Attendances
+                               </div>
+                           </div>
+                        </Link> 
                     </div>
-                    </Tab>
-                   
-                    )
-                })}   
-                </Tabs>
-                
-            
+                    <div className="col-md-4">
+                        <Link
+                            to = {{
+                                pathname: '/class/' + single_class.lecteachtimeid + '/monthly',
+                                state: {
+                                  courses: courses,
+                                  unitcode: single_class.unitcode,
+                                  unitname: single_class.unitname,
+                                }
+                            }}
+                        >
+                           <div class="card">
+                               <div class="card-header">
+                                   Mothly Attendances
+                               </div>
+                           </div> 
+                       </Link>
+                    </div>
+                    <div className="col-md-4">
+                       <div class="card">
+                           <div class="card-header">
+                               Semester Wise Attendances
+                           </div>
+                       </div> 
+                    </div>
+                </div>
             </div>
             )
         } else {

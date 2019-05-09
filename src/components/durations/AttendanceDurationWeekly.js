@@ -1,21 +1,25 @@
 import React from 'react';
 import { Tabs, Tab, Nav, Col, Row } from 'react-bootstrap';
 import moment from 'moment';
-
+import { MDBDataTable } from 'mdbreact';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import firebase from 'firebase';
 
-class AttendanceDuration extends React.Component {
-	render () {
 
-		const {attendances, index_of_tab} = this.props;
-        // console.log(this.props)
+class AttendanceDuration extends React.Component {
+
+    
+	render () {
+        const {single_class, index, course, index_of_tab, attendances} = this.props; 
 
 		return (
 			<div>
-                <h5 className="border-bottom pb-2 mb-2">Attendees within the last week - ({attendances.length})</h5>
+                                
+                <div className="mt-4">
+                                
+                    <h5 className="border-bottom pb-2 mb-2">Attendees within this week - ({attendances.length})</h5>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -26,16 +30,16 @@ class AttendanceDuration extends React.Component {
                                 <th>Reg Number</th>
                               </tr>
                             </thead>
-                {attendances === undefined || attendances && attendances.length == 0 ? 
+                            {attendances === undefined || attendances && attendances.length == 0 ? 
                             
-                            <tbody>
-                                <tr>
-                                    <td colspan='4' className="text-center">No data available</td>
-                                </tr>
-                            </tbody>
-                    :
-                    attendances.map((attendance, index) => {
-                         return(
+                                <tbody>
+                                    <tr>
+                                        <td colspan='4' className="text-center">No data available</td>
+                                    </tr>
+                                </tbody>
+                            :
+                            attendances.map((attendance, index) => {
+                                return(
                             
                                     <tbody>
                                         <td>{index + 1}</td>
@@ -43,13 +47,15 @@ class AttendanceDuration extends React.Component {
                                         <td>{moment(attendance.date.toDate()).calendar()}</td>
                                         <td>{attendance.regno}</td>
                                     </tbody>
-                               
-                            
-                            );
-                      })
-                }
+                                           
+                                    );
+                                })
+                            }
                         </table>
                     </div>
+
+                </div>                        
+                      
             </div>
 			)
 	}
@@ -104,38 +110,22 @@ export default compose(
     connect(mapStateToProps),
     firestoreConnect( props =>
         {
-            const {single_class, index_of_tab, index_of_pill} = props; 
+            const {single_class, unitcode, unitname, courses, index_of_tab} = props; 
             console.log(props)
-            if(index_of_pill == 0) {
+            
                 return [
                     {    
                         collection : 'StudentScanClass',
                         where: [
-                            ['unitcode', '==', props.single_class.unitcode],
-                            ['course', '==', props.single_class.courses[index_of_tab].course],
+                            ['unitcode', '==', unitcode],
+                            ['course', '==', courses[index_of_tab].course],
                             ["date", ">", begin_date_weekly],
                             ["date", "<", end_date_weekly],
-                            ['yearofstudy', '==', props.single_class.courses[index_of_tab].yearofstudy.toString()],
+                            ['yearofstudy', '==', courses[index_of_tab].yearofstudy.toString()],
                         ],
                         
                     }  
                 ]     
-            } else if (index_of_pill == 1) {
-                return [
-                    {    
-                        collection : 'StudentScanClass',
-                        where: [
-                            ['unitcode', '==', props.single_class.unitcode],
-                            ['course', '==', props.single_class.courses[index_of_tab].course],
-                            ["date", ">=", begin_date_weekly],
-                            ["date", "<=", end_date_weekly],
-                            ['yearofstudy', '==', props.single_class.courses[index_of_tab].yearofstudy.toString()],
-                        ],
-                        
-                    }  
-                ]     
-            } 
-                       
                  
         }
     )

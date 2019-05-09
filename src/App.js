@@ -11,6 +11,9 @@ import SignUp from './components/auth/SignUp';
 import StudentsList from './components/attendance/StudentsList';
 import CoursesList from './components/attendance/CoursesList';
 
+import WeeklyAttendance from './components/durations/Weekly';
+import MonthlyAttendance from './components/durations/Monthly';
+
 // import TestTable from './components/attendance/TestTable';
 
 class App extends Component {
@@ -54,7 +57,11 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={Dashboard} />
              
-              <Route path='/class/:id' component={AttendanceDetail} />
+              <Route exact path='/class/:id' component={AttendanceDetail} />
+
+              <Route exact path='/class/:id/weekly' component={WeeklyAttendance} />
+              
+              <Route exact path='/class/:id/monthly' component={MonthlyAttendance} />
               
               <Route path='/login' component={SignIn}/>
               
