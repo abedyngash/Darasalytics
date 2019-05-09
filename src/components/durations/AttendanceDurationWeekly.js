@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import firebase from 'firebase';
+import Loader from 'react-loader-spinner'
 
 
 class AttendanceDuration extends React.Component {
@@ -14,8 +15,9 @@ class AttendanceDuration extends React.Component {
 	render () {
         const {single_class, index, course, index_of_tab, attendances} = this.props; 
 
-		return (
-			<div>
+		if (attendances) {
+            return (
+            <div>
                                 
                 <div className="mt-4">
                                 
@@ -57,7 +59,18 @@ class AttendanceDuration extends React.Component {
                 </div>                        
                       
             </div>
-			)
+            )
+        } else {
+            return(
+              <Loader 
+                 type="Puff"
+                 color="#00BFFF"
+                 height="100"   
+                 width="100"
+              />   
+             )
+        }
+        
 	}
 }
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Tabs, Tab, Nav, Col, Row } from 'react-bootstrap';
+import Loader from 'react-loader-spinner'
 
 import { Redirect, Link } from 'react-router-dom';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ;
 
@@ -103,6 +104,14 @@ class AttendanceDetail extends React.Component {
         return (
             <div className='container content-section'>
             Loading Unit details... 
+            <div class="text-center">                                       
+              <Loader 
+                   type="Puff"
+                   color="#00BFFF"
+                   height="100"   
+                   width="100"
+              />   
+            </div> 
             </div>
         );
         

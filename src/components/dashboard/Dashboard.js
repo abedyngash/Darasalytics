@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
+import Loader from 'react-loader-spinner'
 
 import RegistrarDashboard from './RegistrarDashboard';
 import LecDashboard from './LecturerDashboard';
@@ -53,6 +54,15 @@ class Dashboard extends Component {
                                 <div className="card-header">Please Wait for a moment</div>
                                 <div className="card-body">
                                     Loading Dashboard ...
+                                    <div class="text-center">
+                                        
+                                        <Loader 
+                                             type="Puff"
+                                             color="#00BFFF"
+                                             height="100"   
+                                             width="100"
+                                        />   
+                                    </div>
                                 </div>
                             </div>
                         </div>

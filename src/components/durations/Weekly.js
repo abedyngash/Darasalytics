@@ -25,20 +25,18 @@ class WeeklyAttendance extends React.Component {
 
     
 	render () {
-         this.handleSelect = this.handleSelect.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
 		const {attendances} = this.props; // received from mapStateToProps
-        const {courses, unitcode, unitname} = this.props.location.state
-        console.log(this.props.location.state)
-
-        console.log(attendances)
-
+    const {courses, unitcode, unitname} = this.props.location.state
+    
 		return (
 			<div className="container content-section">
           <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="/">Dashboard</a>
               </li>
-              <li className="breadcrumb-item active">Lecturers</li>
+              
+              
           </ol>
           <Tabs defaultActiveKey={0} className="" onSelect={this.handleSelect} id="uncontrolled-tab-example">
           
