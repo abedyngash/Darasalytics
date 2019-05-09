@@ -9,7 +9,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="%PUBLIC_URL%/bootstrap.css">
 
-
+    <link rel="icon" type="image/png" href="%PUBLIC_URL%/launcher.png"/>
+    
     <link href="%PUBLIC_URL%/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <!-- Page level plugin CSS-->
@@ -47,23 +48,6 @@
   <!-- Demo scripts for this page-->
   <script src="%PUBLIC_URL%/js/demo/datatables-demo.js"></script>
   <script src="%PUBLIC_URL%/js/demo/chart-area-demo.js"></script>
-
-  <script>
-    $(document).ready(function() {
-        // alert("Heeey");
-
-        $('#dataTable,#disbursement_table,#users_table,#school_ward_detail_table').dataTable({
-              dom: 'Blfrtip',
-              buttons: [
-                  { extend: 'copy', text: 'Copy to clipboard' },
-                  { extend: 'excel', text: 'Export to Sheets' },
-                  { extend: 'pdf', text: 'Export to PDF' },
-                  { extend: 'print', text: 'Print' }
-              ],
-              
-            });
-    })
-  </script>
   </body>
   
 </html>

@@ -25,20 +25,11 @@ const Navbar = (props) => {
                   <i class="fas fa-bars"></i>
                 </button>
                 
-                
-                
-                <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                  <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                    <div className="input-group-append">
-                      <button className="btn btn-outline-primary" type="button">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-
+                <div class="ml-auto">
+                    
                 {links}
+                </div>
+
             </nav>
 
             

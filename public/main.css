@@ -2,6 +2,7 @@ body {
   background: #fafafa;
   color: #333333;
   margin-top: 5rem;
+  width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -123,4 +124,7 @@ a:hover {
 .lec-cards {
   margin-right: 15px;
 }
-
+.ml-auto {
+  margin-right: 8%;
+  left: auto !important;
+}

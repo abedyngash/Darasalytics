@@ -7,6 +7,9 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import firebase from 'firebase';
 
+import SplineChart from '../charts/SplineChart';
+
+
 
 class AttendanceDuration extends React.Component {
 
@@ -70,6 +73,16 @@ class AttendanceDuration extends React.Component {
                       hover
                       data={data}
                     />
+                </div>
+
+                <div className="card mb-3">
+                    <div className="card-header">
+                      <i className="fas fa-chart-area"></i>
+                      General Class Attendance Within This Month</div>
+                    <div className="card-body">
+                      <SplineChart />
+                    </div>
+                    <div className="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                 </div>                        
                       
             </div>
