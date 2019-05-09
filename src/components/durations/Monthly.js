@@ -7,6 +7,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import firebase from 'firebase';
 import AttendanceDuration from './AttendanceDurationMonthly';
+import {Redirect} from 'react-router-dom';
 
 
 class MonthlyAttendance extends React.Component {
@@ -25,14 +26,14 @@ class MonthlyAttendance extends React.Component {
         
     }
 
-    
+   
     render () {
          this.handleSelect = this.handleSelect.bind(this);
         const {attendances} = this.props; // received from mapStateToProps
         const {courses, unitcode, unitname} = this.props.location.state
-        console.log(this.props.location.state)
+        // console.log(this.props.location.state)
 
-        console.log(attendances)
+        
 
         return (
             <div className="container content-section">
@@ -66,6 +67,7 @@ class MonthlyAttendance extends React.Component {
             </div>
             )
     }
+    
 }
 
 const mapStateToProps = (state) => {

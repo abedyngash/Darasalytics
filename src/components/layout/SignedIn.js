@@ -7,37 +7,46 @@ import { NavDropdown } from 'react-bootstrap';
 const SignedIn = (props) => {
     
     return (
-        
-        <div>   
-            <ul className="navbar-nav ml-auto ml-md-0">
+       
+          <ul class="navbar-nav mr-auto">
+              <span class="navbar-text">
+                Logged in as :
+              </span>
               
-              <li className="nav-item dropdown no-arrow mx-1">
-                <a className="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i className="fas fa-envelope fa-fw"></i>
+              <li class="nav-item dropdown">
+                <a class="" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   
-                </a>
-                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-                  <a className="dropdown-item" href="#">Action</a>
-                  <a className="dropdown-item" href="#">Another action</a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#">Something else here</a>
+                <div class="avatar-circle ml-3">
+                  <span class="initials">{props.profile.initials}</span>
                 </div>
-              </li>
 
-              <li className="nav-item dropdown no-arrow">
-                <a className="nav-link dropdown-toggle inset" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {props.profile.initials}
                 </a>
-                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                  <a className="dropdown-item" href="#">Settings</a>
-                  <a className="dropdown-item" href="#">Activity Log</a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" onClick={props.signOut} href="">Logout</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
                 </div>
               </li>
+              <span class="navbar-text">
+                <i class="ml-1 fa fa-caret-down"></i>
+              </span>
+
               
-            </ul>
-        </div>
+              <li class="nav-item dropdown d-sm-block d-md-none">
+                  <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menu
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
+                      <a class="dropdown-item" href="#">Dashboard</a>
+                      <a class="dropdown-item" href="#">Profile</a>
+                      <a class="dropdown-item" href="#">Tasks</a>
+                      <a class="dropdown-item" href="#">Etc ...</a>
+                  </div>
+              </li>
+            
+          </ul>
+       
     )
 }
 

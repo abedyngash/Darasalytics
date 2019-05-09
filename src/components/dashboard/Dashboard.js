@@ -49,7 +49,7 @@ class Dashboard extends Component {
                     return "#0000FF";
                   default:      
                     return (
-                        <div className="container">
+                        <div className="container content-section">
                             <div className="card">
                                 <div className="card-header">Please Wait for a moment</div>
                                 <div className="card-body">

@@ -11,31 +11,25 @@ const Navbar = (props) => {
     const links = auth.uid ? <SignedIn profile={profile}/> : <SignedOut />
 
     return (
-           <div> 
-
-            <nav className="navbar navbar-expand navbar-dark bg-dark static-top">
-
-                <NavLink className="navbar-brand mr-4" to="">
+        <div>
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <NavLink className="navbar-brand mr-4" to="/">
                     <img src={mainLogo} className="navbar-img" />
                     &nbsp;
                     DarasaLytics
                 </NavLink>
-
-                <button className="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-                  <i class="fas fa-bars"></i>
-                </button>
-                
-                <div class="ml-auto">
+                <div class="container">
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     
-                {links}
+                    {links}
                 </div>
-
-            </nav>
-
-            
-
-            </div>
-       
+                </div>
+            </nav> 
+        </div>
     );
 }
 
