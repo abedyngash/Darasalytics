@@ -2,27 +2,12 @@ import React from 'react';
 import {Line} from 'react-chartjs-2';
 import {Link } from 'react-router-dom';
 
+import SplineChart from '../charts/SplineChart';
+ 
+
 class RegistrarDashboard extends React.Component {
     constructor(props) {
       super(props);
-
-      this.state = {
-        data : {
-          labels : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'],
-          datasets : [
-            {
-              label: "Classes Attended",
-              backgroundColor: "rgba(0, 0, 255, 0.7)",
-              data: [1, 3, 4, 6, 8, 9, 10, 11, 12, 13 ,12, 6, 4 ,0]
-            },
-            {
-              label: "Classes Missed",
-              backgroundColor: "rgba(255, 0, 0, 0.7)", 
-              data: [13, 12, 11, 10, 9, 8, 6, 4, 3, 1, 0, 4, 6, 12]
-            },
-          ]
-        }
-      } 
     }
 
     render() {
@@ -104,14 +89,7 @@ class RegistrarDashboard extends React.Component {
                   <i className="fas fa-chart-area"></i>
                   General Class Attendance</div>
                 <div className="card-body">
-                  <div style={{ position: "relative", width:1000, height: 550 }}>
-                    <Line 
-                      options={{
-                        responsive : true,
-                      }}
-                      data={this.state.data}
-                    />
-                  </div>
+                  <SplineChart />
                 </div>
                 <div className="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
               </div>

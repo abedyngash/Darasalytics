@@ -15,6 +15,48 @@ class AttendanceDuration extends React.Component {
 	render () {
         const {single_class, index, course, index_of_tab, attendances} = this.props; 
 
+        // console.log(attendances)
+        const attendance_objs = attendances.map((elem, index) => (
+                {   
+                    index: index + 1,
+                    name: elem.studname,
+                    date: moment(elem.date.toDate()).calendar(), 
+                    regno: elem.regno
+                }
+            ));
+        const data = {
+                    columns: [
+                      {
+                        label: 'S/No',
+                        field: 'index',
+                        sort: 'asc',
+                        width: 100
+                      },
+                      {
+                        label: 'Name',
+                        field: 'name',
+                        sort: 'asc',
+                        width: 150
+                      },
+                      {
+                        label: 'Date',
+                        field: 'date',
+                        sort: 'asc',
+                        width: 270
+                      },
+                      {
+                        label: 'Reg Number',
+                        field: 'regno',
+                        sort: 'asc',
+                        width: 200
+                      }
+                    ],
+                    rows: attendance_objs 
+                }
+            if (data.rows.length == 0) {
+                 
+            }
+
 		if (attendances) {
             return (
             <div>
@@ -22,39 +64,12 @@ class AttendanceDuration extends React.Component {
                 <div className="mt-4">
                                 
                     <h5 className="border-bottom pb-2 mb-2">Attendees within this week - ({attendances.length})</h5>
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                              <tr>
-                                <th>S/No</th>
-                                <th>Name of Student</th>
-                                <th>Date Attended</th>
-                                <th>Reg Number</th>
-                              </tr>
-                            </thead>
-                            {attendances === undefined || attendances && attendances.length == 0 ? 
-                            
-                                <tbody>
-                                    <tr>
-                                        <td colspan='4' className="text-center">No data available</td>
-                                    </tr>
-                                </tbody>
-                            :
-                            attendances.map((attendance, index) => {
-                                return(
-                            
-                                    <tbody>
-                                        <td>{index + 1}</td>
-                                        <td>{ attendance.studname}</td>
-                                        <td>{moment(attendance.date.toDate()).calendar()}</td>
-                                        <td>{attendance.regno}</td>
-                                    </tbody>
-                                           
-                                    );
-                                })
-                            }
-                        </table>
-                    </div>
+                    
+                    <MDBDataTable
+                      bordered
+                      hover
+                      data={data}
+                    />
 
                 </div>                        
                       
@@ -124,7 +139,7 @@ export default compose(
     firestoreConnect( props =>
         {
             const {single_class, unitcode, unitname, courses, index_of_tab} = props; 
-            console.log(props)
+            // console.log(props)
             
                 return [
                     {    
