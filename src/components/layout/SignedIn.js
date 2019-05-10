@@ -22,10 +22,8 @@ const SignedIn = (props) => {
 
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a className="dropdown-item" onClick={props.signOut} href="">Logout</a>
+                  
                 </div>
               </li>
               <span class="navbar-text">
@@ -38,10 +36,10 @@ const SignedIn = (props) => {
                     Menu
                   </a>
                   <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                      <a class="dropdown-item" href="#">Dashboard</a>
-                      <a class="dropdown-item" href="#">Profile</a>
+                      <a class="dropdown-item" href="/">Dashboard</a>
+                      <a class="dropdown-item" href="/profile">Profile</a>
                       <a class="dropdown-item" href="#">Tasks</a>
-                      <a class="dropdown-item" href="#">Etc ...</a>
+                      
                   </div>
               </li>
             
