@@ -32,7 +32,6 @@ ul {
 .content-section {
   background: #ffffff;
   margin-top: 5%;
-  
   padding: 20px 20px;
   border: 1px solid #dddddd;
   border-radius: 3px;
@@ -127,4 +126,12 @@ a:hover {
 .ml-auto {
   margin-right: 8%;
   left: auto !important;
+}
+
+.card-content-section {
+  
+  margin-top: 10%;
+  width: 50%;
+  
+  border-radius: 3px;
 }
