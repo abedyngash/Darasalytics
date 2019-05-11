@@ -16,6 +16,7 @@ import WeeklyAttendance from './components/durations/Weekly';
 import MonthlyAttendance from './components/durations/Monthly';
 
 import SplineChart from './components/charts/SplineChart';
+import Profile from './components/user/Profile';
 
 // import TestTable from './components/attendance/TestTable';
 
@@ -41,6 +42,8 @@ class App extends Component {
               <Route exact path='/class/:id/monthly' component={MonthlyAttendance} />
               
               <Route path='/login' component={SignIn}/>
+
+              <Route path='/profile' component={Profile}/>              
 
               <Route path='/charts' component={SplineChart}/>
               

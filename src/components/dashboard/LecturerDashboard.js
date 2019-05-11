@@ -1,20 +1,18 @@
 import React from 'react';
 import AttendanceList from '../attendance/AttendanceList';
 import LecturersList from '../attendance/LecturersList';
-import Profile from '../user/Profile';
+
 
 const LecDashboard = (props) => {
 	const {profile} = props;
 
     return (
-    	<div className="row">
+    	<div className="">
                 
-            <div className="col-md-8">
+            <div className="container content-section align-self-center">
                 <AttendanceList />
             </div>
-            <div className="col-md-4">
-            	<Profile user={profile} />
-            </div>
+            
 		</div>
 	);
 }

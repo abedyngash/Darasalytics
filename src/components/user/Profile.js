@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Profile = (props) => {
-	const {user} = props;
+	const {user} = props.location.state;
 
     return (
-        <div className="container">
+        <div className="container card-content-section">
             
 
         	<div class="card">
