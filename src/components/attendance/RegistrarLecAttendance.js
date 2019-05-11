@@ -5,10 +5,13 @@ import AttendanceSummary from './AttendanceSummary';
 import { connect } from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
 import { compose } from 'redux';
+import {Redirect} from 'react-router-dom';
 
 const RegistrarLecAttendance = (props) => {
     const { lecteachs, auth, profile} = props;
     const { firstName, lastName }  = props.location.state
+
+    if (!auth.uid) {return(<Redirect to="/login" />)}
 
     return (
         <div className="container-fluid content-section">

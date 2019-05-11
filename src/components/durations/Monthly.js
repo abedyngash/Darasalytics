@@ -29,12 +29,12 @@ class MonthlyAttendance extends React.Component {
    
     render () {
          this.handleSelect = this.handleSelect.bind(this);
-        const {attendances} = this.props; // received from mapStateToProps
+        const {attendances, auth} = this.props; // received from mapStateToProps
+        if (!auth.uid) {return(<Redirect to="/login" />)}
         const {courses, unitcode, unitname} = this.props.location.state
         // console.log(this.props.location.state)
 
         
-
         return (
             <div className="container content-section">
                <Tabs defaultActiveKey={0} className="" onSelect={this.handleSelect} id="uncontrolled-tab-example">
@@ -45,11 +45,7 @@ class MonthlyAttendance extends React.Component {
                             
                         <Tab eventKey={index} title={course.course  + " year " + course.yearofstudy}>
                         <div className="mt-4">
-                            
-                        
-                                <AttendanceDuration courses={courses} index={index} unitname={unitname} unitcode={unitcode} index_of_tab={this.state.index_of_tab}/>
-                                
-                            
+                            <AttendanceDuration courses={courses} index={index} unitname={unitname} unitcode={unitcode} index_of_tab={this.state.index_of_tab}/>                            
                         </div>
                         </Tab>
                        
@@ -57,13 +53,6 @@ class MonthlyAttendance extends React.Component {
                     })}   
                 </Tabs>
                 
-
-                {/*<MDBDataTable
-                  striped
-                  bordered
-                  hover
-                  data={data}
-                />*/}
             </div>
             )
     }
@@ -71,17 +60,10 @@ class MonthlyAttendance extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
-    const dbReceived = state.firestore && state.firestore.data.StudentScanClass;
-    
-    const attendances = dbReceived ? state.firestore.ordered.StudentScanClass : [];
     
     return {
-       
-        attendances: attendances,
-       
-        
+        auth: state.firebase.auth,         
     }
 }
 
-export default MonthlyAttendance;
+export default connect(mapStateToProps) (MonthlyAttendance);

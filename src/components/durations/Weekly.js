@@ -7,6 +7,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import firebase from 'firebase';
 import AttendanceDuration from './AttendanceDurationWeekly';
+import {Redirect} from 'react-router-dom';
 
 
 class WeeklyAttendance extends React.Component {
@@ -26,11 +27,13 @@ class WeeklyAttendance extends React.Component {
     
 	render () {
     this.handleSelect = this.handleSelect.bind(this);
-		const {attendances} = this.props; // received from mapStateToProps
+		const {attendances, auth} = this.props; // received from mapStateToProps
+    if (!auth.uid) {return(<Redirect to="/login"/>)}
     const {courses, unitcode, unitname} = this.props.location.state
+
     
 		return (
-			<div className="container content-section">
+			  <div className="container content-section">
           <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="/">Dashboard</a>
@@ -44,31 +47,27 @@ class WeeklyAttendance extends React.Component {
 
                   return (
                       
-                  <Tab eventKey={index} title={course.course  + " year " + course.yearofstudy}>
-                  <div className="mt-4">
-                      
-                  
-                          <AttendanceDuration courses={courses} index={index} unitname={unitname} unitcode={unitcode} index_of_tab={this.state.index_of_tab}/>
-                          
-                      
-                  </div>
-                  </Tab>
+                    <Tab eventKey={index} title={course.course  + " year " + course.yearofstudy}>
+                      <div className="mt-4">
+                        <AttendanceDuration courses={courses} index={index} unitname={unitname} unitcode={unitcode} index_of_tab={this.state.index_of_tab}/>   
+                      </div>
+                    </Tab>
                  
                   )
               })}   
           </Tabs>
-                
-
-                {/*<MDBDataTable
-                  striped
-                  bordered
-                  hover
-                  data={data}
-                />*/}
-            </div>
+        </div>
 			)
 	}
 }
 
+const mapStateToProps = (state) => {
+    
+    return {
+        auth: state.firebase.auth,         
+    }
+}
 
-export default WeeklyAttendance;
+
+
+export default connect(mapStateToProps) (WeeklyAttendance);
