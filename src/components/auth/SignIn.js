@@ -27,7 +27,7 @@ class SignIn extends Component {
     const {authError, auth,} = this.props;
     if(auth.uid) return <Redirect to='/' />
     return (
-      <div className=" bg-dark container">
+      <div className="container">
       <div className="card card-register mx-auto mt-5">
       <div className="card-header">Login Here</div>
       <div className="card-body">

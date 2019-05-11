@@ -28,7 +28,7 @@ class SignUp extends Component {
     // if(auth.uid) return <Redirect to='/' />
     
     return (
-      <div className=" bg-dark container">
+      <div className="container">
       <div className="card card-register mx-auto mt-5">
       <div className="card-header">Register New User</div>
       <div className="card-body">

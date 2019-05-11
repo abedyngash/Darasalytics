@@ -14,7 +14,7 @@ class RegistrarDashboard extends React.Component {
 	   const {lecs, courses, course_length, students, auth} = this.props;
     
       return (
-          <div className="container-fluid">
+          <div className="content-section container-fluid">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                   <a href="/">Dashboard</a>
