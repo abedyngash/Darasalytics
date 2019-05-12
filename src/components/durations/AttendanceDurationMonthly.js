@@ -19,6 +19,48 @@ class AttendanceDuration extends React.Component {
 	render () {
         const {single_class, index, course, index_of_tab, attendances} = this.props; 
 
+        const options = {
+        animationEnabled: true,
+        // title:{
+        //  text: "Weeks"
+        // },
+        axisX: {
+          
+          title: "Weeks",
+        },
+        axisY: {
+          title: "Number of classes",
+          includeZero: false
+        },
+        toolTip: {
+          shared: true
+        },
+        data: [{
+          type: "spline",
+          name: "Classes Attended",
+          showInLegend: true,
+          dataPoints: [
+            { y: 10, label: "Week 1" },
+            { y: 12, label: "Week 2" },
+            { y: 14, label: "Week 3" },
+            { y: 12, label: "Week 4" },
+            
+          ]
+        },
+        {
+          type: "spline",
+          name: "Classes Missed",
+          showInLegend: true,
+          dataPoints: [
+            { y: 20, label: "Week 1" },
+            { y: 18, label: "Week 2" },
+            { y: 16, label: "Week 3" },
+            { y: 18, label: "Week 4" },
+            
+          ]
+        }]
+    }
+
 
         // console.log(attendances)
         const attendance_objs = attendances.map((elem, index) => (
@@ -80,7 +122,7 @@ class AttendanceDuration extends React.Component {
                       <i className="fas fa-chart-area"></i>
                       General Class Attendance Within This Month</div>
                     <div className="card-body">
-                      <SplineChart />
+                      <SplineChart options={options} />
                     </div>
                     <div className="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                 </div>                        
