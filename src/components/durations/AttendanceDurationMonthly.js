@@ -15,21 +15,17 @@ const moment = extendMoment(Moment);
 
 
 class AttendanceDuration extends React.Component {
-
-	render () {
-        const {single_class, index, course, index_of_tab, attendances} = this.props; 
-
-        const options = {
+  options = {
             animationEnabled: true,
-            // title:{
-            //  text: "Weeks"
-            // },
+            title:{
+             text: "Weekly Attendance"
+            },
             axisX: {
               
               title: "Weeks",
             },
             axisY: {
-              title: "Number of classes",
+              title: "Number of Attendees",
               includeZero: false
             },
             toolTip: {
@@ -37,7 +33,7 @@ class AttendanceDuration extends React.Component {
             },
             data: [{
               type: "spline",
-              name: "Classes Attended",
+              name: "Students Attended",
               showInLegend: true,
               dataPoints: [
                 { y: 10, label: "Week 1" },
@@ -49,7 +45,7 @@ class AttendanceDuration extends React.Component {
             },
             {
               type: "spline",
-              name: "Classes Missed",
+              name: "Students Missed Class",
               showInLegend: true,
               dataPoints: [
                 { y: 20, label: "Week 1" },
@@ -60,6 +56,11 @@ class AttendanceDuration extends React.Component {
               ]
             }]
         }
+
+	render () {
+        const {single_class, index, course, index_of_tab, attendances} = this.props; 
+
+        
 
 
         // console.log(attendances)
@@ -100,21 +101,14 @@ class AttendanceDuration extends React.Component {
                     ],
                     rows: attendance_objs 
                 }
-            if (data.rows.length == 0) {
-                 
-            }
+            
 
 		return (
 			<div>
                                 
                 <div className="mt-4">
-                                
-                    <h5 className="border-bottom pb-2 mb-2">Attendees within this Month - ({attendances.length})</h5>
-                    <MDBDataTable
-                      bordered
-                      hover
-                      data={data}
-                    />
+                <h5 className="border-bottom pb-2 mb-2">Attendees within this Month - ({attendances.length})</h5>
+              
                 </div>
 
                 {(() => {
@@ -122,7 +116,7 @@ class AttendanceDuration extends React.Component {
                   const month = moment().month();// August (0 indexed)
                   const startDate = moment();
 
-                  console.log("inputDate : ", startDate.format("dddd, MMMM Do YYYY, h:mm:ss a"));
+                  // console.log("inputDate : ", startDate.format("dddd, MMMM Do YYYY, h:mm:ss a"));
 
                   // Get the first and last day of the month
                   const firstDay = moment().startOf('month')
@@ -165,18 +159,29 @@ class AttendanceDuration extends React.Component {
                     }
 
                     const weekRange = moment.range(firstWeekDay, lastWeekDay)
-                    calendar.push({week_number: index + 1, from: firstWeekDay.format("dddd DD-MM-YYYY"), to: lastWeekDay.format("dddd DD-MM-YYYY")})
+                    calendar.push({week_number: index + 1, from: moment(firstWeekDay).format("dddd MMM Do YYYY"), to: moment(lastWeekDay).format("dddd MMM Do YYYY")})
                     // console.log("<br>week number: " + index + " day: " + firstWeekDay.format("dddd DD-MM-YYYY") + " to " + lastWeekDay.format("dddd DD-MM-YYYY"))
 
                   }
                   
-                    
+                    // console.log(calendar)
                     return (
-                      <ul>
+                      <div className="content-section">
                         {calendar.map((period, index) => {
-                          return <li key={index}> Week: {period.week_number} Starting From: {period.from} To: {period.to}</li>
+                           return (
+                               <React.Fragment>
+                                  <h5 className="border-bottom mt-4 mb-4 pb-4"> Week {period.week_number}: Starting From: {period.from} To: {period.to}</h5>
+                                  <div className="mb-4 pb-4 border-bottom">
+                                  <MDBDataTable
+                                    bordered
+                                    hover
+                                    data={data}
+                                  />
+                                  </div>
+                               </React.Fragment>     
+                            )                                    
                         })}
-                      </ul>
+                      </div>
                     )
                     
                                 
@@ -187,7 +192,7 @@ class AttendanceDuration extends React.Component {
                       <i className="fas fa-chart-area"></i>
                       General Class Attendance Within This Month</div>
                     <div className="card-body">
-                      <SplineChart options={options} />
+                      <SplineChart options={this.options} />
                     </div>
                     <div className="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                 </div>                        
