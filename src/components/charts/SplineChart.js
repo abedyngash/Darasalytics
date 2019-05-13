@@ -8,7 +8,7 @@ class SplineChart extends Component {
 		const {options} = this.props;
 		return (
 		<div>
-			<h3>General Class Attendace</h3>
+			<h3>{options.heading}</h3>
 			<CanvasJSChart options = {options} 
 				/*onRef={ref => this.chart = ref}*/
 			/>

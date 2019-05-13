@@ -17,9 +17,7 @@ const moment = extendMoment(Moment);
 class AttendanceDuration extends React.Component {
   options = {
             animationEnabled: true,
-            title:{
-             text: "Weekly Attendance"
-            },
+            heading: "Weekly Attendance",
             axisX: {
               
               title: "Weeks",
@@ -166,12 +164,12 @@ class AttendanceDuration extends React.Component {
                   
                     // console.log(calendar)
                     return (
-                      <div className="content-section">
+                      <div className="">
                         {calendar.map((period, index) => {
                            return (
                                <React.Fragment>
-                                  <h5 className="border-bottom mt-4 mb-4 pb-4"> Week {period.week_number}: Starting From: {period.from} To: {period.to}</h5>
-                                  <div className="mb-4 pb-4 border-bottom">
+                                  <h5 className="border-bottom mb-4 pb-4"> Week {period.week_number}: Starting From: {period.from} To: {period.to}</h5>
+                                  <div className="normal-content-section mb-4 pb-4 border-bottom">
                                   <MDBDataTable
                                     bordered
                                     hover
