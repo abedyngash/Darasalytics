@@ -37,9 +37,9 @@ class App extends Component {
              
               <Route exact path='/class/:id' component={AttendanceDetail} />
 
-              <Route exact path='/class/:id/weekly' component={WeeklyAttendance} />
+              <Route exact path='/class/:id/weekly/' component={WeeklyAttendance} />
               
-              <Route exact path='/class/:id/monthly' component={MonthlyAttendance} />
+              <Route exact path='/class/:id/monthly/' component={MonthlyAttendance} />
               
               <Route path='/login' component={SignIn}/>
 

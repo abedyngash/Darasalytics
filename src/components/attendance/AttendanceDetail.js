@@ -26,6 +26,7 @@ class AttendanceDetail extends React.Component {
         
                 
         const {single_class, courses, auth} = this.props;
+        console.log(single_class)
         if(!auth.uid) return <Redirect to='/login' />
         
         if(single_class) {
@@ -55,8 +56,9 @@ class AttendanceDetail extends React.Component {
                     <div className="col-md-4">
                         <Link
                             to = {{
-                                pathname: '/class/' + single_class.lecteachtimeid + '/weekly',
+                                pathname: '/class/' + single_class.lecteachtimeid + '/weekly/',
                                 state: {
+                                  lecteachtimeid: single_class.lecteachtimeid,
                                   courses: courses,
                                   unitcode: single_class.unitcode,
                                   unitname: single_class.unitname,
@@ -74,8 +76,9 @@ class AttendanceDetail extends React.Component {
                     <div className="col-md-4">
                         <Link
                             to = {{
-                                pathname: '/class/' + single_class.lecteachtimeid + '/monthly',
+                                pathname: '/class/' + single_class.lecteachtimeid + '/monthly/',
                                 state: {
+                                  lecteachtimeid: single_class.lecteachtimeid,
                                   courses: courses,
                                   unitcode: single_class.unitcode,
                                   unitname: single_class.unitname,

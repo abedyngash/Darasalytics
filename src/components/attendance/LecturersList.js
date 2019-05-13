@@ -6,7 +6,9 @@ import {Link } from 'react-router-dom';
 const LecturersList = (props) => {
     const {auth} = props;
     if(!auth.uid) return <Redirect to='/login' />
-    const { lecs} = props.location.state
+        console.log(props)
+    if (props.location.state) {
+        const { lecs} = props.location.state
         return (
         <div className="container-fluid content-section">
             <ol className="breadcrumb">
@@ -44,6 +46,20 @@ const LecturersList = (props) => {
             </div>
         </div>
     )
+    }
+    else {
+        return (
+            <div className="container card-content-section align-self-center">
+              <div className="card card-register mx-auto mt-5">
+                <div className="card-header">Document Expired</div>
+                  <div className="card-body">
+                    <h5>Sorry, The Route You're Tring to Access Has Expired</h5>
+                    <p>Retrace Back From the <Link to="/">Dashboard</Link></p>                 
+                  </div>
+              </div>
+            </div>
+            )
+    }
     
 }
 
