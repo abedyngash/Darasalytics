@@ -69,6 +69,45 @@ class RegistrarDashboard extends React.Component {
         }]
     }
     
+    const options_2 = {
+            animationEnabled: true,
+            // heading: "Monthly Attendance",
+            axisX: {
+              
+              title: "Weeks",
+            },
+            axisY: {
+              title: "Number of Attendees",
+              includeZero: false
+            },
+            toolTip: {
+              shared: true
+            },
+            data: [{
+              type: "spline",
+              name: "Students Attended",
+              showInLegend: true,
+              dataPoints: [
+                { y: 10, label: "Week 1" },
+                { y: 12, label: "Week 2" },
+                { y: 14, label: "Week 3" },
+                { y: 12, label: "Week 4" },
+                
+              ]
+            },
+            {
+              type: "spline",
+              name: "Students Missed Class",
+              showInLegend: true,
+              dataPoints: [
+                { y: 20, label: "Week 1" },
+                { y: 18, label: "Week 2" },
+                { y: 16, label: "Week 3" },
+                { y: 18, label: "Week 4" },
+                
+              ]
+            }]
+        }
     
       return (
           <div className="content-section container-fluid">
@@ -138,19 +177,31 @@ class RegistrarDashboard extends React.Component {
                     </div>
                   </div>
                 </div>
-                
               </div>
-
-              <div className="card mb-3">
-                <div className="card-header">
-                  <i className="fas fa-chart-area"></i>
-                  General Class Attendance</div>
-                <div className="card-body">
-                  <SplineChart options={options}/>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="card mb-3">
+                  <div className="card-header">
+                    <i className="fas fa-chart-area"></i>
+                    General Class Attendance This Semester</div>
+                  <div className="card-body">
+                    <SplineChart options={options}/>
+                  </div>
+                  <div className="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                 </div>
-                <div className="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
               </div>
-
+              <div className="col-md-6">
+                <div className="card mb-3">
+                  <div className="card-header">
+                    <i className="fas fa-chart-area"></i>
+                    General Class Attendance This Month</div>
+                  <div className="card-body">
+                    <SplineChart options={options_2}/>
+                  </div>
+                  <div className="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                </div>
+              </div>
+            </div>
           </div>
       );
     }
