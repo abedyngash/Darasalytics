@@ -14,6 +14,7 @@ class RegistrarDashboard extends React.Component {
 	   const {lecs, courses, course_length, students, auth} = this.props;
 
      const options = {
+        theme: "light2",
         animationEnabled: true,
         // title:{
         //  text: "Weeks"
@@ -30,7 +31,7 @@ class RegistrarDashboard extends React.Component {
           shared: true
         },
         data: [{
-          type: "spline",
+          type: "splineArea",
           name: "Classes Attended",
           showInLegend: true,
           dataPoints: [
@@ -49,7 +50,7 @@ class RegistrarDashboard extends React.Component {
           ]
         },
         {
-          type: "spline",
+          type: "splineArea",
           name: "Classes Missed",
           showInLegend: true,
           dataPoints: [
