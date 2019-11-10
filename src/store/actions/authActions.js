@@ -40,20 +40,20 @@ export const signUpLec = newUser => {
       .auth()
       .createUserWithEmailAndPassword(newUser.email, newUser.password)
       .then(resp => {
-        switch (newUser.role) {
-          case "lecturer":
-            return firestore
-              .collection("Staff")
-              .doc(resp.user.uid)
-              .set({
-                firstName: newUser.firstName,
-                lastName: newUser.lastName,
-                email: newUser.email,
-                role: newUser.role,
-                initials: newUser.firstName[0] + newUser.lastName[0]
-              })
-              .then(() => {
-                // console.log(firestore.collection("Staff").doc(resp.user.uid));
+        return firestore
+          .collection("Staff")
+          .doc(resp.user.uid)
+          .set({
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
+            email: newUser.email,
+            role: newUser.role,
+            initials: newUser.firstName[0] + newUser.lastName[0]
+          })
+          .then(() => {
+            switch (newUser.role) {
+              case "lecturer":
+                console.log(newUser);
                 return firestore
                   .collection("LecUser")
                   .doc(resp.user.uid)
@@ -70,13 +70,14 @@ export const signUpLec = newUser => {
                     // role: newUser.role,
                     // initials: newUser.firstName[0] + newUser.lastName[0]
                   });
-              });
-          case "registrar":
-            break;
 
-          default:
-            break;
-        }
+              case "registrar":
+                break;
+
+              default:
+                break;
+            }
+          });
       })
       .then(() => {
         dispatch({ type: "SIGNUP_LEC_SUCCESS" });
