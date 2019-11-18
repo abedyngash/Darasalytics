@@ -18,6 +18,9 @@ import MonthlyAttendance from "./components/durations/Monthly";
 
 import SplineChart from "./components/charts/SplineChart";
 import Profile from "./components/user/Profile";
+import CreateLec from "./components/attendance/CreateLecturers";
+import CreateStudent from "./components/attendance/CreateStudent";
+import CreateUnit from "./components/attendance/CreateUnit";
 
 // import TestTable from './components/attendance/TestTable';
 
@@ -33,6 +36,12 @@ class App extends Component {
             <div class="col py-3">
               <Switch>
                 <Route exact path="/" component={Dashboard} />
+
+                <Route exact path="/add_lec" component={CreateLec} />
+
+                <Route exact path="/add_student" component={CreateStudent} />
+
+                <Route exact path="/add_unit" component={CreateUnit} />
 
                 <Route exact path="/class/:id" component={AttendanceDetail} />
 

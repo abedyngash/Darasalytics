@@ -57,6 +57,7 @@ class SignUp extends Component {
                     className="form-control"
                   >
                     <option value="none">-----</option>
+                    <option value="admin">Admin</option>
                     <option value="lecturer">Lecturer</option>
                     <option value="dean">School Dean</option>
                     <option value="c.o.d">C.O.D</option>
