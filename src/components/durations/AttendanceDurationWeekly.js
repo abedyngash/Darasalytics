@@ -7,6 +7,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import firebase from "firebase";
 import Loader from "react-loader-spinner";
+import ReactToPrint from "react-to-print";
 
 class AttendanceDuration extends React.Component {
   render() {
@@ -81,8 +82,20 @@ class AttendanceDuration extends React.Component {
             <h5 className="border-bottom pb-2 mb-2">
               Attendees within this week - ({attendances.length})
             </h5>
-
-            <MDBDataTable bordered hover data={data} />
+            <ReactToPrint
+              trigger={() => (
+                <button className="btn btn-danger" href="#">
+                  Print this out!
+                </button>
+              )}
+              content={() => this.componentRef}
+            />
+            <MDBDataTable
+              bordered
+              hover
+              data={data}
+              ref={el => (this.componentRef = el)}
+            />
           </div>
         </div>
       );

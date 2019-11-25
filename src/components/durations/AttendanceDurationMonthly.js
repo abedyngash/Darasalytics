@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import firebase from "firebase";
-
+import ReactToPrint from "react-to-print";
 import WeeksInMonth from "./WeeksInMonth";
 
 import SplineChart from "../charts/SplineChart";
@@ -163,11 +163,20 @@ class AttendanceDuration extends React.Component {
                       Week {period.week_number}: Starting From: {period.from}{" "}
                       To: {period.to}
                     </h5>
+                    <ReactToPrint
+                      trigger={() => (
+                        <button className="btn btn-danger" href="#">
+                          Print this out!
+                        </button>
+                      )}
+                      content={() => this.componentRef}
+                    />
                     <WeeksInMonth
                       unitcode={unitcode}
                       courses={courses}
                       index_of_tab={index_of_tab}
                       period={period}
+                      ref={el => (this.componentRef = el)}
                     />
                   </React.Fragment>
                 );
